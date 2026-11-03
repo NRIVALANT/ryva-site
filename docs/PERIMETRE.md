@@ -8,13 +8,13 @@ Une case = une chose vérifiable. On ne coche que ce qui est réellement livré 
 ## 1. Socle et garde-fous (S0)
 
 - [ ] Projet Next.js 16, TypeScript strict, Tailwind 4, déployé sur Vercel
-- [ ] `.gitattributes` imposant LF
-- [ ] `.env.example` avec les quatre variables, sans valeurs
-- [ ] Arborescence `src/content/`, `src/components/{layout,sections,ui}/`, `src/lib/`, `scripts/`
-- [ ] Aides `A_COMPLETER()` et `A_VERIFIER()`, composant `VisuelProvisoire`
-- [ ] Site en `noindex` tant que `SITE_INDEXABLE` ne vaut pas `"true"`
-- [ ] `scripts/check-content.mjs` branché en `prebuild`, bloquant en production, non bloquant ailleurs
-- [ ] `npm run check:prod` (version stricte, lançable à la main)
+- [x] `.gitattributes` imposant LF
+- [x] `.env.example` avec les quatre variables, sans valeurs
+- [x] Arborescence `src/content/`, `src/components/{layout,sections,ui}/`, `src/lib/`, `scripts/`
+- [x] Aides `A_COMPLETER()` et `A_VERIFIER()`, composant `VisuelProvisoire`
+- [x] Site en `noindex` tant que `SITE_INDEXABLE` ne vaut pas `"true"`
+- [x] `scripts/check-content.mjs` branché en `prebuild`, bloquant en production, non bloquant ailleurs
+- [x] `npm run check:prod` (version stricte, lançable à la main)
 - [ ] GitHub Actions sur les PR : lint, typecheck, build
 - [ ] Lighthouse CI avec budgets LCP < 2,5 s et CLS < 0,1, exécuté sur les PR
 - [ ] Preview deploy automatique sur chaque PR (Vercel)
@@ -82,7 +82,7 @@ Une case = une chose vérifiable. On ne coche que ce qui est réellement livré 
 - [ ] `alt` réels sur toutes les images porteuses de sens
 - [ ] Responsive vérifié de 360 px à 1920 px, sans défilement horizontal
 - [ ] Passage `prefers-reduced-motion`
-- [ ] `npm run check:prod` : liste exacte de ce qui bloque encore la mise en ligne
+- [x] `npm run check:prod` : liste exacte de ce qui bloque encore la mise en ligne
 - [ ] Variables d'environnement de production en portée Production sur Vercel
 - [ ] Rapport final : ce qui est prêt, ce qui bloque, risques résiduels
 
