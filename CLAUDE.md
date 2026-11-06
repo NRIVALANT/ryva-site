@@ -90,6 +90,14 @@ Budgets : **LCP < 2,5 s, CLS < 0,1**, appliqués par Lighthouse CI dès la premi
 - Pas de JavaScript client pour ce que CSS sait faire.
 - Pas de vidéo en lecture automatique avec son. Une vidéo de hero éventuelle est muette, en boucle, avec une image de remplacement (`poster`) et ne se charge pas sur connexion économe.
 
+### 8 bis. Responsive et unités
+Le site est responsive de 360 px à 1920 px, mobile d'abord. Les tailles s'expriment en **`rem`** (ou en `em`, `%`, `vw`/`svh`, `clamp()`), jamais en `px` pour les tailles de texte, les espacements, les hauteurs de contrôle et les largeurs de mise en page. Les valeurs en pixels de `docs/tokens.json` sont converties en `rem` (px ÷ 16) quand on les déclare dans `globals.css`.
+
+- Les titres de vitrine sont **fluides** (`clamp()` entre la taille mobile et la taille bureau de la charte), pas un saut brutal à un point de rupture.
+- Seule exception tolérée : les filets de 1 px (bordures, séparateurs).
+- Les points de rupture sont ceux de Tailwind (déjà en `rem`). Aucune largeur fixe en pixels, aucun défilement horizontal.
+- Toute fonctionnalité est vérifiée et utilisable sur mobile, pas seulement sur bureau.
+
 ### 9. Accessibilité
 Contrastes AA vérifiés, navigation clavier complète, focus toujours visible, `alt` réels et descriptifs sur toute image porteuse de sens (`alt=""` sur le décoratif), une seule `h1` par page, hiérarchie de titres sans saut, formulaire avec libellés associés et erreurs annoncées.
 
@@ -123,3 +131,29 @@ Server Action + validation Zod (schéma partagé avec le formulaire client) + Re
 2. Coche dans `docs/PERIMETRE.md` les lignes réellement livrées, et uniquement celles-là.
 3. Liste ce qui reste en `A_COMPLETER` ou `VisuelProvisoire` après ton passage.
 4. Signale tout écart pris par rapport au cadrage, avec sa raison.
+
+## Avancement
+
+Registre tenu à jour en fin de chaque session. Le détail des cases se lit dans `docs/PERIMETRE.md`.
+
+### Session 0 — Socle (fusionnée dans `main`, PR #1)
+- Livré : `.env.example` suivi par git, marqueurs `A_COMPLETER` / `A_VERIFIER`, `VisuelProvisoire`, `check-content.mjs` (prebuild + `check:prod`), `noindex` par défaut, CI GitHub Actions, Lighthouse CI.
+- Choix actés :
+  - Le garde-fou détecte aussi les **appels** `A_COMPLETER(` / `A_VERIFIER(` dans les sources : la chaîne littérale n'existe qu'à l'exécution.
+  - `next.config.ts` garde la règle Turbopack `@tailwindcss/turbopack` (le projet n'a pas `@tailwindcss/postcss`). `cacheComponents` et `partialPrefetching` ont été retirés.
+  - Le paquet `cn`, `button.tsx` et `src/lib/utils.ts` ont été supprimés. Un `cn` (`clsx` + `tailwind-merge`) reviendra avec le premier composant shadcn, sur accord.
+- Toujours en attente, côté Nicolas : protection de `main`, vérification des previews Vercel.
+- Pas de Chrome sur le poste : Lighthouse ne tourne pas en local (Edge refuse le mode headless). Il tourne sur GitHub.
+
+### Session 1 — Contenu typé, jetons, header, hero (livrée, en attente de validation visuelle)
+Branche `feat/01-contenu-tokens`. Nicolas commite, pousse et ouvre la PR lui-même.
+- Livré : les 11 fichiers de `src/content/`, jetons sombres dans `globals.css`, `src/lib/marque.ts`, header (menu mobile client), barre CTA mobile, footer, hero avec `VisuelProvisoire`, composant `LienBouton`.
+- Reste à faire par Nicolas : valider les jetons sur la preview (case « Validation par Nicolas » non cochée dans `docs/PERIMETRE.md`).
+- Choix actés :
+  - Règle 8 bis : tailles en rem, jamais en px. Titre du hero fluide de 2 rem à 3,5 rem.
+  - Deux tailles de texte **provisoires** hors charte : `texte-corps-vitrine` (1 rem / 1,5 rem) et `texte-sous-titre` (1,125 rem / 1,75 rem), à ajouter à `docs/tokens.json` ou à remplacer.
+  - Mention de réserve des bénéfices **reformulée** par rapport au cadrage §4.6 : le cadrage emploie un terme du vocabulaire interdit, même en négation. Elle reste en `A_VERIFIER`.
+  - Bouton secondaire : bordure en `texte-secondaire` (8,5:1) et non `bordure-forte` (environ 1,7:1, sous les 3:1 exigés pour un composant).
+  - CTA du header à partir de 768 px ; en dessous, la barre fixe du bas fait office de CTA permanent. Menu d'ancres sous 1024 px.
+  - `ryva-icone.png` est en RGB sans alpha : coins blancs à traiter en session 4.
+  - Les ancres (`#technologies`…, `#contact`) et les liens du footer (`/mentions-legales`, `/confidentialite`) pointent vers des pages ou sections créées plus tard (sessions 2 à 4).

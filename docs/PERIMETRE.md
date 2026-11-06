@@ -21,15 +21,15 @@ Une case = une chose vérifiable. On ne coche que ce qui est réellement livré 
 
 ## 2. Contenu typé et identité (S1)
 
-- [ ] `src/content/` : `site.ts`, `hero.ts`, `stats.ts`, `technologies.ts`, `steps.ts`, `benefits.ts`, `specs.ts`, `faq.ts`, `segments.ts`, `legal.ts`, `ui.ts`
-- [ ] Chaque donnée du cadrage est reprise fidèlement ; chaque donnée manquante est en `A_COMPLETER`
-- [ ] Jetons de la charte (thème sombre) déclarés dans `globals.css`, uniquement ceux utilisés
-- [ ] Geist et Geist Mono chargées via `next/font`
-- [ ] Logotype (`ryva-logotype-blanc.png`) intégré au header
-- [ ] Header sticky translucide avec ancres et CTA permanent « Demander une démo »
-- [ ] CTA fixe en bas d'écran sur mobile
-- [ ] Footer minimal (liens légaux, rappel de réserve)
-- [ ] Section Hero (4.1) complète
+- [x] `src/content/` : `site.ts`, `hero.ts`, `stats.ts`, `technologies.ts`, `steps.ts`, `benefits.ts`, `specs.ts`, `faq.ts`, `segments.ts`, `legal.ts`, `ui.ts`
+- [x] Chaque donnée du cadrage est reprise fidèlement ; chaque donnée manquante est en `A_COMPLETER`
+- [x] Jetons de la charte (thème sombre) déclarés dans `globals.css`, uniquement ceux utilisés
+- [x] Geist et Geist Mono chargées via `next/font`
+- [x] Logotype (`ryva-logotype-blanc.png`) intégré au header
+- [x] Header sticky translucide avec ancres et CTA permanent « Demander une démo »
+- [x] CTA fixe en bas d'écran sur mobile
+- [x] Footer minimal (liens légaux, rappel de réserve)
+- [x] Section Hero (4.1) complète
 - [ ] **Validation par Nicolas des jetons sur cette première section**
 
 ## 3. Sections de la landing (S2)
