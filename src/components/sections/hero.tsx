@@ -11,7 +11,7 @@ export function Hero() {
   return (
     <section
       aria-labelledby="hero-titre"
-      className="relative isolate flex min-h-[calc(100svh-4rem)] items-end overflow-hidden"
+      className="relative isolate flex min-h-[calc(100svh-4.75rem)] items-end overflow-hidden"
     >
       <VisuelProvisoire remplir className="-z-20" />
       <div

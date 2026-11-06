@@ -58,9 +58,9 @@ export function MenuMobile({
         id={idPanneau}
         aria-label={ariaNavigation}
         hidden={!ouvert}
-        className="absolute inset-x-0 top-full border-b border-bordure bg-fond"
+        className="absolute inset-x-0 top-full mt-2 rounded-lg border border-bordure bg-fond"
       >
-        <ul className="mx-auto flex max-w-7xl flex-col px-4 py-2 sm:px-6">
+        <ul className="flex flex-col px-4 py-2">
           {liens.map((lien) => (
             <li key={lien.href}>
               <a

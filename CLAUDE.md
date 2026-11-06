@@ -118,6 +118,7 @@ Server Action + validation Zod (schéma partagé avec le formulaire client) + Re
 - Convention : `feat/NN-nom`. Commits atomiques, messages en français, préfixe conventionnel (`feat:`, `fix:`, `chore:`, `docs:`).
 - `.gitattributes` impose des fins de ligne LF. Ne jamais commiter de bruit de fins de ligne.
 - Ne jamais supprimer de fichiers verrou `.git/*.lock` : le signaler.
+- **Jamais de ligne `Co-Authored-By`** (ni autre attribution) dans un message de commit ou une description de PR. Nicolas commite, pousse et ouvre les PR lui-même (voir aussi la section Avancement).
 
 ## Ce que tu fais en début de session
 
@@ -145,7 +146,7 @@ Registre tenu à jour en fin de chaque session. Le détail des cases se lit dans
 - Toujours en attente, côté Nicolas : protection de `main`, vérification des previews Vercel.
 - Pas de Chrome sur le poste : Lighthouse ne tourne pas en local (Edge refuse le mode headless). Il tourne sur GitHub.
 
-### Session 1 — Contenu typé, jetons, header, hero (livrée, en attente de validation visuelle)
+### Session 1 — Contenu typé, jetons, header, hero (fusionnée dans `main`, PR #2)
 Branche `feat/01-contenu-tokens`. Nicolas commite, pousse et ouvre la PR lui-même.
 - Livré : les 11 fichiers de `src/content/`, jetons sombres dans `globals.css`, `src/lib/marque.ts`, header (menu mobile client), barre CTA mobile, footer, hero avec `VisuelProvisoire`, composant `LienBouton`.
 - Reste à faire par Nicolas : valider les jetons sur la preview (case « Validation par Nicolas » non cochée dans `docs/PERIMETRE.md`).
@@ -157,3 +158,18 @@ Branche `feat/01-contenu-tokens`. Nicolas commite, pousse et ouvre la PR lui-mê
   - CTA du header à partir de 768 px ; en dessous, la barre fixe du bas fait office de CTA permanent. Menu d'ancres sous 1024 px.
   - `ryva-icone.png` est en RGB sans alpha : coins blancs à traiter en session 4.
   - Les ancres (`#technologies`…, `#contact`) et les liens du footer (`/mentions-legales`, `/confidentialite`) pointent vers des pages ou sections créées plus tard (sessions 2 à 4).
+
+### Session 2 — Sections de la landing (livrée dans l'arbre de travail de `feat/02-landing`, non commitée)
+- Direction visuelle **B (futuriste sombre)** choisie par Nicolas ; l'UX est un point prioritaire ; tout doit rester modulable.
+- Livré : les 9 sections (§4.2 à §4.7, §4.9 à §4.11) dans `src/components/sections/`, composants partagés `Section`, `Carte`, `CtaSection` dans `src/components/ui/`, header en pastille flottante, ordre de la page dans `src/app/page.tsx`. Non construits : §4.8 (à décider), §4.12 (session 3).
+- Les effets vivent tous dans `globals.css` (bloc EFFETS) : `revele`, `jauge`, `compteur`, `repere`, `accordeon`. CSS pur, contenu visible par défaut, désactivés si `prefers-reduced-motion` ou si le navigateur ne supporte pas `animation-timeline`.
+- Choix actés :
+  - FAQ en éléments `<details name="faq">` natifs, sans dépendance ni JavaScript (écart assumé avec le prompt, qui demandait l'accordéon shadcn). `clsx` et `tailwind-merge` ne sont donc toujours pas installés.
+  - Compteur CSS (`@property`) sur les trois chiffres simples. Piège résolu : le `counter-reset` doit être sur l'élément animé, pas sur son pseudo-élément, sinon l'écran reste à 0.
+  - Grands chiffres en style `affiche`. Un seul `VisuelProvisoire` ajouté (§4.3, trois blocs).
+  - Sections numérotées par un compteur CSS (le numéro suit l'ordre de la page).
+  - Les titres h2 sont dans `site.titres` ; les ancres dans `ancres` (`site.ts`).
+- Contrôles automatiques ajoutés : `npm run check:qualite` (`scripts/check-qualite.mjs`, à lancer après le build, branché dans `ci.yml`) : couleurs en dur, `px`, une seule h1, titres sans saut, images avec alt, sections nommées, ancres existantes, noindex. L'ancre `#contact` est tolérée en avertissement jusqu'à la session 3 : **retirer `ANCRES_EN_ATTENTE` du script quand le formulaire existera.**
+- **CI jamais exécutée :** tous les runs GitHub Actions des PR #1 et #2 sont en `startup_failure` (« workflow file issue »). Le YAML des deux workflows est valide en local, le dépôt est privé. Cause à lire dans l'interface GitHub (page du run). Tant que ce n'est pas réglé, aucune vérification de CI n'a réellement tourné.
+- LCP : mesuré à 109 ms sans bridage, 0,9 à 1,7 s avec le bridage DevTools de Lighthouse, mais la simulation de Lighthouse donne 2,4 à 2,6 s en local (Edge, Windows), même avec le hero seul. Le budget de 2,5 s est donc incertain tant que la CI n'a pas tourné. Leviers testés sans effet : polices en `display: optional`, `preload: false` sur Geist Mono, `inlineCss`. Gardé : `sizes` sur les logos.
+- Lighthouse local (Edge via `lighthouse` installé hors du projet) : accessibilité 100, bonnes pratiques 100, SEO 63 (le `noindex` volontaire fait échouer « page explorable »).

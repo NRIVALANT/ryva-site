@@ -18,6 +18,7 @@ export function Footer() {
             width={logo.largeur}
             height={logo.hauteur}
             alt={site.nom}
+            sizes="11rem"
             className="h-8 w-auto self-start"
           />
           <address className="flex flex-col gap-1 not-italic texte-corps text-texte-secondaire">
