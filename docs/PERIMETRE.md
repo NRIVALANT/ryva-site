@@ -34,16 +34,16 @@ Une case = une chose vérifiable. On ne coche que ce qui est réellement livré 
 
 ## 3. Sections de la landing (S2)
 
-- [ ] 4.2 Bandeau de chiffres clés
-- [ ] 4.3 Les technologies (3 blocs)
-- [ ] 4.4 Comment ça fonctionne (triptyque)
-- [ ] 4.5 Les 4 étapes (timeline verticale, révélation au scroll)
-- [ ] 4.6 Bénéfices, avec leur mention de réserve en pied de section
-- [ ] 4.7 Technologie détaillée (6 blocs)
-- [ ] 4.9 Pour qui (4 cartes)
-- [ ] 4.10 Caractéristiques techniques (tableau, valeurs manquantes en `A_COMPLETER`)
-- [ ] 4.11 FAQ en accordéon (questions du cadrage ; réponses non fournies en `A_COMPLETER`)
-- [ ] Animations CSS discrètes, `prefers-reduced-motion` respecté
+- [x] 4.2 Bandeau de chiffres clés
+- [x] 4.3 Les technologies (3 blocs)
+- [x] 4.4 Comment ça fonctionne (triptyque)
+- [x] 4.5 Les 4 étapes (timeline verticale, révélation au scroll)
+- [x] 4.6 Bénéfices, avec leur mention de réserve en pied de section
+- [x] 4.7 Technologie détaillée (6 blocs)
+- [x] 4.9 Pour qui (4 cartes)
+- [x] 4.10 Caractéristiques techniques (tableau, valeurs manquantes en `A_COMPLETER`)
+- [x] 4.11 FAQ en accordéon (questions du cadrage ; réponses non fournies en `A_COMPLETER`)
+- [x] Animations CSS discrètes, `prefers-reduced-motion` respecté
 - [ ] Rien dans cette session ne dégrade LCP ni CLS
 - [ ] **[À DÉCIDER]** 4.8 Encart photobiomodulation : non construit tant que la fonction n'est pas confirmée sur le produit
 

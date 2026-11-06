@@ -17,6 +17,7 @@
   --color-action-forte: #d4572a;
   --color-marque-noir: #0e1011;
   --color-cedre-texte: #e2a552;
+  --color-infrarouge: #d4572a;
 
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
@@ -27,7 +28,7 @@
 }
 
 html {
-  scroll-padding-top: 5rem;
+  scroll-padding-top: 6rem;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -106,4 +107,180 @@ body {
   font-size: 1.125rem;
   line-height: 1.75rem;
   font-weight: 400;
+}
+
+@utility texte-mono-libelle {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  line-height: 0.9375rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+}
+
+/*
+ * ===== EFFETS =====
+ * Tous les effets de la landing vivent ici : pour changer l'UI/UX, on modifie ces blocs.
+ * Règles communes : CSS uniquement (animations liées au scroll), le contenu est visible par défaut,
+ * l'animation n'est appliquée que si le navigateur la supporte ET que prefers-reduced-motion
+ * ne demande pas de la réduire. Seuls transform et opacity bougent : aucun décalage de mise en page.
+ */
+
+/* Révélation douce à l'entrée dans l'écran. */
+@keyframes revele-entree {
+  from {
+    opacity: 0;
+    transform: translateY(1.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@utility revele {
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      animation: revele-entree linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 45%;
+    }
+  }
+}
+
+/* Repère d'instrument : un trait fin devant un numéro de section en Geist Mono. Décoratif.
+   Le numéro vient d'un compteur CSS : réordonner les sections renumérote tout seul. */
+body {
+  counter-reset: section;
+}
+
+@utility repere {
+  counter-increment: section;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  line-height: 0.9375rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-cedre-texte);
+
+  &::before {
+    content: "";
+    inline-size: 2rem;
+    block-size: 1px;
+    background-color: var(--color-cedre-texte);
+  }
+
+  &::after {
+    content: counter(section, decimal-leading-zero);
+  }
+}
+
+/* Jauge : un trait vertical qui se remplit pendant le défilement, comme une montée en température. */
+@keyframes jauge-remplissage {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+@utility jauge {
+  position: relative;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    inset-block: 0;
+    inset-inline-start: var(--jauge-decalage, 1.75rem);
+    inline-size: 0.125rem;
+    margin-inline-start: -0.0625rem;
+    transform-origin: top;
+  }
+
+  &::before {
+    background-color: var(--color-bordure);
+  }
+
+  &::after {
+    background-color: var(--color-infrarouge);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      &::after {
+        animation: jauge-remplissage linear both;
+        animation-timeline: view();
+        animation-range: cover 20% cover 70%;
+      }
+    }
+  }
+}
+
+/*
+ * Compteur : @property rend --n animable, counter() l'affiche. Valeur finale par défaut.
+ * La largeur est réservée en chiffres (--chiffres) pour que 0 → 60 ne déplace rien.
+ */
+@property --n {
+  syntax: "<integer>";
+  initial-value: 0;
+  inherits: false;
+}
+
+@keyframes compteur-montee {
+  from {
+    --n: 0;
+  }
+  to {
+    --n: var(--cible);
+  }
+}
+
+@utility compteur {
+  --n: var(--cible);
+  display: inline-block;
+  min-inline-size: calc(var(--chiffres, 2) * 1ch);
+  text-align: end;
+  font-variant-numeric: tabular-nums;
+
+  counter-reset: n var(--n);
+
+  &::before {
+    content: counter(n);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      animation: compteur-montee linear both;
+      animation-timeline: view();
+      animation-range: entry 10% cover 35%;
+    }
+  }
+}
+
+/* FAQ : ouverture douce des <details>, sans JavaScript. Repli : ouverture instantanée. */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (selector(::details-content)) {
+    .accordeon {
+      interpolate-size: allow-keywords;
+    }
+
+    .accordeon::details-content {
+      block-size: 0;
+      overflow: clip;
+      transition:
+        block-size 0.25s ease,
+        content-visibility 0.25s allow-discrete;
+    }
+
+    .accordeon[open]::details-content {
+      block-size: auto;
+    }
+  }
 }

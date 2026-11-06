@@ -2,6 +2,7 @@ import { A_COMPLETER } from "./marqueurs";
 
 /** Identifiants d'ancre des sections de la landing (utilisés par le header, le hero et les sections). */
 export const ancres = {
+  chiffres: "chiffres",
   technologies: "technologies",
   fonctionnement: "fonctionnement",
   etapes: "etapes",
@@ -18,11 +19,25 @@ export interface LienNavigation {
   href: string;
 }
 
+/** Titres (h2) des sections de la landing : intitulés du cadrage §4. */
+export interface TitresSections {
+  chiffres: string;
+  technologies: string;
+  fonctionnement: string;
+  etapes: string;
+  benefices: string;
+  technologieDetail: string;
+  pourQui: string;
+  caracteristiques: string;
+  faq: string;
+}
+
 export interface SiteContent {
   langue: string;
   nom: string;
   titre: string;
   description: string;
+  titres: TitresSections;
   /** Contenu principal : cible du lien d'évitement. */
   idContenu: string;
   /** Ancres du header, dans l'ordre d'affichage (libellés courts des titres du cadrage §4). */
@@ -42,6 +57,17 @@ export const site: SiteContent = {
   nom: "RYVA",
   titre: "RYVA",
   description: A_COMPLETER("description du site (balise meta)"),
+  titres: {
+    chiffres: "Chiffres clés",
+    technologies: "Les technologies",
+    fonctionnement: "Comment ça fonctionne",
+    etapes: "Les 4 étapes",
+    benefices: "Bénéfices mis en avant",
+    technologieDetail: "Technologie détaillée",
+    pourQui: "Pour qui",
+    caracteristiques: "Caractéristiques techniques",
+    faq: "FAQ",
+  },
   idContenu: "contenu",
   navigation: [
     { libelle: "Technologies", href: `#${ancres.technologies}` },

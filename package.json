@@ -9,7 +9,8 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
-    "check:prod": "node scripts/check-content.mjs --strict"
+    "check:prod": "node scripts/check-content.mjs --strict",
+    "check:qualite": "node scripts/check-qualite.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.9.0",

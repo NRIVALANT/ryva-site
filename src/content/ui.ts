@@ -20,6 +20,10 @@ export interface UiContent {
     ariaLiensLegaux: string;
     titreRappels: string;
   };
+  tableau: {
+    colonneLibelle: string;
+    colonneValeur: string;
+  };
 }
 
 export const ui: UiContent = {
@@ -42,5 +46,9 @@ export const ui: UiContent = {
   footer: {
     ariaLiensLegaux: "Informations légales",
     titreRappels: "À savoir",
+  },
+  tableau: {
+    colonneLibelle: "Caractéristique",
+    colonneValeur: "Valeur",
   },
 };

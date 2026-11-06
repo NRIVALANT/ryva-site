@@ -25,3 +25,6 @@ jobs:
       - run: npm run typecheck
       # Hors production : le garde-fou de contenu informe sans bloquer.
       - run: npm run build
+      # Règles de CLAUDE.md sur le code et sur le HTML généré : couleurs en dur, px, hiérarchie de titres,
+      # images sans alt, ancres cassées, noindex. À lancer après le build.
+      - run: npm run check:qualite
