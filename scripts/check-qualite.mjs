@@ -4,8 +4,8 @@
 // Toute erreur fait échouer le script (code 1) : la CI s'en sert comme garde-fou.
 //
 // Source : pas de couleur en dur ni de pixels dans les composants.
-// HTML généré de la page d'accueil : langue, une seule h1, titres sans saut, images avec alt,
-// sections nommées, ancres internes existantes, robots cohérent avec SITE_INDEXABLE.
+// HTML généré de chaque page : langue, une seule h1, titres sans saut, images avec alt, champs avec
+// libellé, sections nommées, ancres internes existantes, robots cohérent avec SITE_INDEXABLE.
 
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { join, relative, sep } from "node:path";
@@ -13,11 +13,9 @@ import { fileURLToPath } from "node:url";
 
 const racine = fileURLToPath(new URL("..", import.meta.url));
 const erreurs = [];
-const avertissements = [];
 
-// Ancres connues pour pointer vers une section pas encore construite.
-// À retirer quand la section existe (session 3 : formulaire de contact, id « contact »).
-const ANCRES_EN_ATTENTE = ["contact"];
+// Pages générées à contrôler : à compléter quand une page est ajoutée (session 4 : pages légales).
+const PAGES = { "/": "index.html", "/contact": "contact.html" };
 
 const rel = (p) => relative(racine, p).split(sep).join("/");
 
@@ -47,54 +45,58 @@ for (const fichier of fichiersUi) {
 }
 
 // ---------- 2. HTML généré
-const html = join(racine, ".next", "server", "app", "index.html");
-if (!existsSync(html)) {
-  erreurs.push("`.next/server/app/index.html` introuvable : lancer `npm run build` avant ce script.");
-} else {
-  const page = readFileSync(html, "utf8");
+const contenus = {};
+for (const [route, nom] of Object.entries(PAGES)) {
+  const chemin = join(racine, ".next", "server", "app", nom);
+  if (existsSync(chemin)) contenus[route] = readFileSync(chemin, "utf8");
+  else erreurs.push(`${route} : ${nom} introuvable (lancer « npm run build » avant ce script)`);
+}
+const idsDe = (page) => new Set([...page.matchAll(/\bid="([^"]+)"/g)].map((m) => m[1]));
+const idsAccueil = idsDe(contenus["/"] ?? "");
 
-  if (!/<html[^>]*\blang="fr"/.test(page)) erreurs.push("accueil : <html lang=\"fr\"> absent");
+for (const [route, page] of Object.entries(contenus)) {
+  const signaler = (message) => erreurs.push(`${route} : ${message}`);
+  const ids = idsDe(page);
+
+  if (!/<html[^>]*\blang="fr"/.test(page)) signaler('<html lang="fr"> absent');
+  if (!/<main\b/.test(page)) signaler("balise <main> absente");
 
   const titres = [...page.matchAll(/<h([1-6])[\s>]/g)].map((m) => Number(m[1]));
   const nbH1 = titres.filter((n) => n === 1).length;
-  if (nbH1 !== 1) erreurs.push(`accueil : ${nbH1} h1 au lieu d'une seule`);
+  if (nbH1 !== 1) signaler(`${nbH1} h1 au lieu d'une seule`);
   titres.forEach((n, i) => {
-    if (i > 0 && n > titres[i - 1] + 1) {
-      erreurs.push(`accueil : saut de titre h${titres[i - 1]} → h${n} (hiérarchie sans saut exigée)`);
-    }
+    if (i > 0 && n > titres[i - 1] + 1) signaler(`saut de titre h${titres[i - 1]} → h${n}`);
   });
 
   for (const img of page.matchAll(/<img\b[^>]*>/g)) {
-    if (!/\balt=/.test(img[0])) erreurs.push(`accueil : image sans attribut alt : ${img[0].slice(0, 80)}`);
+    if (!/\balt=/.test(img[0])) signaler(`image sans attribut alt : ${img[0].slice(0, 80)}`);
   }
-
-  const ids = new Set([...page.matchAll(/\bid="([^"]+)"/g)].map((m) => m[1]));
-
   for (const m of page.matchAll(/<section\b[^>]*aria-labelledby="([^"]+)"/g)) {
-    if (!ids.has(m[1])) erreurs.push(`accueil : aria-labelledby="${m[1]}" ne pointe vers aucun id`);
+    if (!ids.has(m[1])) signaler(`aria-labelledby="${m[1]}" ne pointe vers aucun id`);
   }
-  if (!/<main\b/.test(page)) erreurs.push("accueil : balise <main> absente");
 
-  const ancres = new Set([...page.matchAll(/\bhref="#([^"]+)"/g)].map((m) => m[1]));
-  for (const ancre of ancres) {
-    if (ids.has(ancre)) continue;
-    if (ANCRES_EN_ATTENTE.includes(ancre)) {
-      avertissements.push(`ancre #${ancre} : section pas encore construite (attendue)`);
-    } else {
-      erreurs.push(`accueil : le lien #${ancre} ne pointe vers aucune section`);
-    }
+  // Chaque champ de formulaire a un libellé associé.
+  for (const m of page.matchAll(/<(?:input|select|textarea)\b[^>]*>/g)) {
+    if (/type="hidden"/.test(m[0])) continue;
+    const id = (m[0].match(/\bid="([^"]+)"/) ?? [])[1];
+    if (!id || !page.includes(`for="${id}"`)) signaler(`champ sans libellé associé : ${m[0].slice(0, 80)}`);
+  }
+
+  // Ancres : « #x » vise la page courante, « /#x » la page d'accueil.
+  for (const m of page.matchAll(/\bhref="(\/?)#([^"]+)"/g)) {
+    const cibles = m[1] ? idsAccueil : ids;
+    if (!cibles.has(m[2])) signaler(`le lien ${m[1]}#${m[2]} ne pointe vers rien`);
   }
 
   const robots = (page.match(/<meta name="robots" content="([^"]+)"/) ?? [])[1];
   const attendu = process.env.SITE_INDEXABLE === "true" ? "index, follow" : "noindex, nofollow";
-  if (robots !== attendu) erreurs.push(`accueil : meta robots « ${robots} », attendu « ${attendu} »`);
+  if (robots !== attendu) signaler(`meta robots « ${robots} », attendu « ${attendu} »`);
 }
 
 // ---------- Sortie
-for (const a of avertissements) console.log(`avertissement  ${a}`);
 for (const e of erreurs) console.error(`ERREUR  ${e}`);
 console.log(
-  `\ncheck-qualite : ${erreurs.length} erreur(s), ${avertissements.length} avertissement(s), ` +
+  `\ncheck-qualite : ${erreurs.length} erreur(s), ${Object.keys(contenus).length} pages et ` +
     `${fichiersUi.length} fichiers de composants contrôlés.`,
 );
 if (erreurs.length > 0) process.exit(1);

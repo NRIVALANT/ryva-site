@@ -40,7 +40,7 @@ export interface SiteContent {
   titres: TitresSections;
   /** Contenu principal : cible du lien d'évitement. */
   idContenu: string;
-  /** Ancres du header, dans l'ordre d'affichage (libellés courts des titres du cadrage §4). */
+  /** Ancres du header, dans l'ordre d'affichage. En « /#… » pour fonctionner depuis toutes les pages. */
   navigation: LienNavigation[];
   /** CTA permanent : header, hero, barre mobile. */
   ctaDemo: LienNavigation;
@@ -70,14 +70,14 @@ export const site: SiteContent = {
   },
   idContenu: "contenu",
   navigation: [
-    { libelle: "Technologies", href: `#${ancres.technologies}` },
-    { libelle: "Fonctionnement", href: `#${ancres.fonctionnement}` },
-    { libelle: "Bénéfices", href: `#${ancres.benefices}` },
-    { libelle: "Pour qui", href: `#${ancres.pourQui}` },
-    { libelle: "Caractéristiques", href: `#${ancres.caracteristiques}` },
-    { libelle: "FAQ", href: `#${ancres.faq}` },
+    { libelle: "Technologies", href: `/#${ancres.technologies}` },
+    { libelle: "Fonctionnement", href: `/#${ancres.fonctionnement}` },
+    { libelle: "Bénéfices", href: `/#${ancres.benefices}` },
+    { libelle: "Pour qui", href: `/#${ancres.pourQui}` },
+    { libelle: "Caractéristiques", href: `/#${ancres.caracteristiques}` },
+    { libelle: "FAQ", href: `/#${ancres.faq}` },
   ],
-  ctaDemo: { libelle: "Demander une démo", href: `#${ancres.contact}` },
+  ctaDemo: { libelle: "Demander une démo", href: `/#${ancres.contact}` },
   coordonnees: {
     email: A_COMPLETER("adresse email professionnelle"),
     telephone: A_COMPLETER("numéro de téléphone"),

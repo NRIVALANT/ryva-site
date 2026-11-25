@@ -1,3 +1,4 @@
+import { SectionContact } from "@/components/contact/section-contact";
 import { Benefices } from "@/components/sections/benefices";
 import { Caracteristiques } from "@/components/sections/caracteristiques";
 import { ChiffresCles } from "@/components/sections/chiffres-cles";
@@ -9,7 +10,7 @@ import { PourQui } from "@/components/sections/pour-qui";
 import { TechnologieDetaillee } from "@/components/sections/technologie-detaillee";
 import { Technologies } from "@/components/sections/technologies";
 
-/** Ordre des sections = ordre du cadrage §4. Le formulaire (§4.12) arrive en session 3. */
+/** Ordre des sections = ordre du cadrage §4. La conversion (§4.12) clôt la page. */
 export default function Home() {
   return (
     <>
@@ -23,6 +24,7 @@ export default function Home() {
       <PourQui />
       <Caracteristiques />
       <Faq />
+      <SectionContact />
     </>
   );
 }
