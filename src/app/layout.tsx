@@ -4,8 +4,10 @@ import { CtaMobile } from "@/components/layout/cta-mobile";
 import { Footer } from "@/components/layout/footer";
 import { Header } from "@/components/layout/header";
 import { site } from "@/content/site";
+import { pages } from "@/content/seo";
 import { ui } from "@/content/ui";
 import { estIndexable } from "@/lib/indexation";
+import { urlSite } from "@/lib/url";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -19,8 +21,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: site.titre,
-  description: site.description,
+  metadataBase: new URL(urlSite()),
+  title: pages.accueil.titre,
+  description: pages.accueil.description,
   robots: estIndexable()
     ? { index: true, follow: true }
     : { index: false, follow: false },

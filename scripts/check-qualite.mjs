@@ -14,8 +14,13 @@ import { fileURLToPath } from "node:url";
 const racine = fileURLToPath(new URL("..", import.meta.url));
 const erreurs = [];
 
-// Pages générées à contrôler : à compléter quand une page est ajoutée (session 4 : pages légales).
-const PAGES = { "/": "index.html", "/contact": "contact.html" };
+// Pages générées à contrôler : à compléter quand une page est ajoutée.
+const PAGES = {
+  "/": "index.html",
+  "/contact": "contact.html",
+  "/mentions-legales": "mentions-legales.html",
+  "/confidentialite": "confidentialite.html",
+};
 
 const rel = (p) => relative(racine, p).split(sep).join("/");
 
@@ -86,6 +91,21 @@ for (const [route, page] of Object.entries(contenus)) {
   for (const m of page.matchAll(/\bhref="(\/?)#([^"]+)"/g)) {
     const cibles = m[1] ? idsAccueil : ids;
     if (!cibles.has(m[2])) signaler(`le lien ${m[1]}#${m[2]} ne pointe vers rien`);
+  }
+
+  // SEO : titre, description, canonique, image de partage, JSON-LD lisible et sans marqueur.
+  if (!/<title>[^<]+<\/title>/.test(page)) signaler("titre absent");
+  if (!/<meta name="description" content="[^"]+"/.test(page)) signaler("meta description absente");
+  const canonique = (page.match(/<link rel="canonical" href="([^"]+)"/) ?? [])[1];
+  if (!canonique || new URL(canonique).pathname !== route) signaler("canonique absente ou incorrecte");
+  if (!/<meta property="og:image" content="[^"]+"/.test(page)) signaler("image Open Graph absente");
+  for (const m of page.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)) {
+    try {
+      JSON.parse(m[1]);
+    } catch {
+      signaler("JSON-LD illisible");
+    }
+    if (/\[À (COMPLÉTER|VÉRIFIER)\]/.test(m[1])) signaler("marqueur de contenu dans le JSON-LD");
   }
 
   const robots = (page.match(/<meta name="robots" content="([^"]+)"/) ?? [])[1];

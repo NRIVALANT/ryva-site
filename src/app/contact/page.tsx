@@ -1,11 +1,10 @@
-import type { Metadata } from "next";
 import { FormulaireContact } from "@/components/contact/formulaire-contact";
 import { contact, typesStructure } from "@/content/contact";
-import { ancres, site } from "@/content/site";
+import { pages } from "@/content/seo";
+import { ancres } from "@/content/site";
+import { metadonnees } from "@/lib/metadonnees";
 
-export const metadata: Metadata = {
-  title: `${contact.metaTitre} | ${site.nom}`,
-};
+export const metadata = metadonnees(pages.contact);
 
 /** Page /contact : le même formulaire que la section de la landing. Pas de barre CTA mobile ici. */
 export default function PageContact() {
