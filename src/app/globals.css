@@ -18,6 +18,7 @@
   --color-marque-noir: #0e1011;
   --color-cedre-texte: #e2a552;
   --color-infrarouge: #d4572a;
+  --color-danger: #f3938a;
 
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
@@ -282,5 +283,14 @@ body {
     .accordeon[open]::details-content {
       block-size: auto;
     }
+  }
+}
+
+/* La barre CTA mobile ferait doublon sur une page qui est déjà le formulaire (/contact). */
+body:has([data-sans-cta-mobile]) {
+  padding-bottom: 0;
+
+  & [data-cta-mobile] {
+    display: none;
   }
 }

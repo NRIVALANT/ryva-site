@@ -7,7 +7,7 @@ Une case = une chose vérifiable. On ne coche que ce qui est réellement livré 
 
 ## 1. Socle et garde-fous (S0)
 
-- [ ] Projet Next.js 16, TypeScript strict, Tailwind 4, déployé sur Vercel
+- [x] Projet Next.js 16, TypeScript strict, Tailwind 4, déployé sur Vercel
 - [x] `.gitattributes` imposant LF
 - [x] `.env.example` avec les quatre variables, sans valeurs
 - [x] Arborescence `src/content/`, `src/components/{layout,sections,ui}/`, `src/lib/`, `scripts/`
@@ -17,7 +17,7 @@ Une case = une chose vérifiable. On ne coche que ce qui est réellement livré 
 - [x] `npm run check:prod` (version stricte, lançable à la main)
 - [ ] GitHub Actions sur les PR : lint, typecheck, build
 - [ ] Lighthouse CI avec budgets LCP < 2,5 s et CLS < 0,1, exécuté sur les PR
-- [ ] Preview deploy automatique sur chaque PR (Vercel)
+- [x] Preview deploy automatique sur chaque PR (Vercel)
 
 ## 2. Contenu typé et identité (S1)
 
@@ -30,7 +30,7 @@ Une case = une chose vérifiable. On ne coche que ce qui est réellement livré 
 - [x] CTA fixe en bas d'écran sur mobile
 - [x] Footer minimal (liens légaux, rappel de réserve)
 - [x] Section Hero (4.1) complète
-- [ ] **Validation par Nicolas des jetons sur cette première section**
+- [x] **Validation par Nicolas des jetons sur cette première section**
 
 ## 3. Sections de la landing (S2)
 
@@ -45,22 +45,22 @@ Une case = une chose vérifiable. On ne coche que ce qui est réellement livré 
 - [x] 4.11 FAQ en accordéon (questions du cadrage ; réponses non fournies en `A_COMPLETER`)
 - [x] Animations CSS discrètes, `prefers-reduced-motion` respecté
 - [ ] Rien dans cette session ne dégrade LCP ni CLS
-- [ ] **[À DÉCIDER]** 4.8 Encart photobiomodulation : non construit tant que la fonction n'est pas confirmée sur le produit
+- ~~4.8 Encart photobiomodulation : non construit tant que la fonction n'est pas confirmée sur le produit~~ — **abandonné** (décision de Nicolas, 25 novembre 2026)
 
 ## 4. Contact (S3)
 
-- [ ] 4.12 Section de conversion en bas de landing
-- [ ] Page `/contact` réutilisant le même composant de formulaire
-- [ ] Champs : nom, email, téléphone, type de structure, établissement, message, consentement
-- [ ] Schéma Zod partagé client / serveur
-- [ ] Server Action : validation, envoi Resend, `reply-to` = email du visiteur
-- [ ] Honeypot
+- [x] 4.12 Section de conversion en bas de landing
+- [x] Page `/contact` réutilisant le même composant de formulaire
+- [x] Champs : nom, email, téléphone, type de structure, établissement, message, consentement
+- [x] Schéma Zod partagé client / serveur
+- [x] Server Action : validation, envoi Resend, `reply-to` = email du visiteur
+- [x] Honeypot
 - [ ] Limitation de débit effective sur serverless (option validée par Nicolas)
-- [ ] Contenu saisi échappé dans l'email
-- [ ] Consentement RGPD non pré-coché, bloquant
-- [ ] États : chargement, succès, erreur de validation, erreur d'envoi
-- [ ] Aucun faux succès si une variable d'environnement manque
-- [ ] Les CTA « Demander une démo » du site pointent vers ce formulaire
+- [x] Contenu saisi échappé dans l'email
+- [x] Consentement RGPD non pré-coché, bloquant
+- [x] États : chargement, succès, erreur de validation, erreur d'envoi
+- [x] Aucun faux succès si une variable d'environnement manque
+- [x] Les CTA « Demander une démo » du site pointent vers ce formulaire
 
 ## 5. SEO et pages légales (S4)
 
@@ -72,7 +72,7 @@ Une case = une chose vérifiable. On ne coche que ce qui est réellement livré 
 - [ ] `/mentions-legales` : structure complète, champs d'identité en `A_COMPLETER`
 - [ ] `/confidentialite` : finalité, base légale, durée de conservation, droits RGPD, responsable de traitement
 - [ ] Analytique sans cookie, aucun bandeau de consentement nécessaire
-- [ ] **[À DÉCIDER]** `/cgu` : non construite, utile seulement si un service est fourni en ligne
+- ~~`/cgu` : non construite, utile seulement si un service est fourni en ligne~~ — **abandonné** (décision de Nicolas, 25 novembre 2026)
 
 ## 6. Qualité et mise en production (S5)
 

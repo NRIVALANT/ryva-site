@@ -23,6 +23,8 @@ jobs:
       - run: npm ci
       - run: npm run lint
       - run: npm run typecheck
+      # Formulaire de contact : validation serveur, honeypot, échappement, variables manquantes.
+      - run: npm test
       # Hors production : le garde-fou de contenu informe sans bloquer.
       - run: npm run build
       # Règles de CLAUDE.md sur le code et sur le HTML généré : couleurs en dur, px, hiérarchie de titres,

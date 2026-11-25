@@ -149,7 +149,7 @@ Registre tenu à jour en fin de chaque session. Le détail des cases se lit dans
 ### Session 1 — Contenu typé, jetons, header, hero (fusionnée dans `main`, PR #2)
 Branche `feat/01-contenu-tokens`. Nicolas commite, pousse et ouvre la PR lui-même.
 - Livré : les 11 fichiers de `src/content/`, jetons sombres dans `globals.css`, `src/lib/marque.ts`, header (menu mobile client), barre CTA mobile, footer, hero avec `VisuelProvisoire`, composant `LienBouton`.
-- Reste à faire par Nicolas : valider les jetons sur la preview (case « Validation par Nicolas » non cochée dans `docs/PERIMETRE.md`).
+- Jetons validés par Nicolas le 25 novembre 2026.
 - Choix actés :
   - Règle 8 bis : tailles en rem, jamais en px. Titre du hero fluide de 2 rem à 3,5 rem.
   - Deux tailles de texte **provisoires** hors charte : `texte-corps-vitrine` (1 rem / 1,5 rem) et `texte-sous-titre` (1,125 rem / 1,75 rem), à ajouter à `docs/tokens.json` ou à remplacer.
@@ -159,9 +159,9 @@ Branche `feat/01-contenu-tokens`. Nicolas commite, pousse et ouvre la PR lui-mê
   - `ryva-icone.png` est en RGB sans alpha : coins blancs à traiter en session 4.
   - Les ancres (`#technologies`…, `#contact`) et les liens du footer (`/mentions-legales`, `/confidentialite`) pointent vers des pages ou sections créées plus tard (sessions 2 à 4).
 
-### Session 2 — Sections de la landing (livrée dans l'arbre de travail de `feat/02-landing`, non commitée)
+### Session 2 — Sections de la landing (fusionnée dans `main`, PR #3)
 - Direction visuelle **B (futuriste sombre)** choisie par Nicolas ; l'UX est un point prioritaire ; tout doit rester modulable.
-- Livré : les 9 sections (§4.2 à §4.7, §4.9 à §4.11) dans `src/components/sections/`, composants partagés `Section`, `Carte`, `CtaSection` dans `src/components/ui/`, header en pastille flottante, ordre de la page dans `src/app/page.tsx`. Non construits : §4.8 (à décider), §4.12 (session 3).
+- Livré : les 9 sections (§4.2 à §4.7, §4.9 à §4.11) dans `src/components/sections/`, composants partagés `Section`, `Carte`, `CtaSection` dans `src/components/ui/`, header en pastille flottante, ordre de la page dans `src/app/page.tsx`. Non construits : §4.8 (abandonné), §4.12 (fait en session 3).
 - Les effets vivent tous dans `globals.css` (bloc EFFETS) : `revele`, `jauge`, `compteur`, `repere`, `accordeon`. CSS pur, contenu visible par défaut, désactivés si `prefers-reduced-motion` ou si le navigateur ne supporte pas `animation-timeline`.
 - Choix actés :
   - FAQ en éléments `<details name="faq">` natifs, sans dépendance ni JavaScript (écart assumé avec le prompt, qui demandait l'accordéon shadcn). `clsx` et `tailwind-merge` ne sont donc toujours pas installés.
@@ -170,6 +170,19 @@ Branche `feat/01-contenu-tokens`. Nicolas commite, pousse et ouvre la PR lui-mê
   - Sections numérotées par un compteur CSS (le numéro suit l'ordre de la page).
   - Les titres h2 sont dans `site.titres` ; les ancres dans `ancres` (`site.ts`).
 - Contrôles automatiques ajoutés : `npm run check:qualite` (`scripts/check-qualite.mjs`, à lancer après le build, branché dans `ci.yml`) : couleurs en dur, `px`, une seule h1, titres sans saut, images avec alt, sections nommées, ancres existantes, noindex. L'ancre `#contact` est tolérée en avertissement jusqu'à la session 3 : **retirer `ANCRES_EN_ATTENTE` du script quand le formulaire existera.**
-- **CI jamais exécutée :** tous les runs GitHub Actions des PR #1 et #2 sont en `startup_failure` (« workflow file issue »). Le YAML des deux workflows est valide en local, le dépôt est privé. Cause à lire dans l'interface GitHub (page du run). Tant que ce n'est pas réglé, aucune vérification de CI n'a réellement tourné.
+- **CI jamais exécutée (cause connue, côté compte GitHub) :** tous les runs des PR #1 à #3 sont en `startup_failure` avec le message « The job was not started because recent account payments have failed or your spending limit needs to be increased ». Les workflows sont valides (YAML et validateur) : il n'y a rien à corriger dans le dépôt. À régler dans GitHub, Billing & plans. Tant que ce n'est pas fait, lancer en local avant chaque push : `npm run lint && npm run typecheck && npm run build && npm run check:qualite`.
 - LCP : mesuré à 109 ms sans bridage, 0,9 à 1,7 s avec le bridage DevTools de Lighthouse, mais la simulation de Lighthouse donne 2,4 à 2,6 s en local (Edge, Windows), même avec le hero seul. Le budget de 2,5 s est donc incertain tant que la CI n'a pas tourné. Leviers testés sans effet : polices en `display: optional`, `preload: false` sur Geist Mono, `inlineCss`. Gardé : `sizes` sur les logos.
 - Lighthouse local (Edge via `lighthouse` installé hors du projet) : accessibilité 100, bonnes pratiques 100, SEO 63 (le `noindex` volontaire fait échouer « page explorable »).
+
+### Session 3 — Formulaire de contact (branche `feat/03-contact`, PR à ouvrir par Nicolas)
+- Livré : `src/content/contact.ts`, `src/lib/contact/` (`champs`, `schema`, `email`, `traiter`, `action`), `src/components/contact/` (formulaire et section), page `/contact`, tests `npm test` (lanceur intégré à Node, aucune dépendance), branchés dans `ci.yml`.
+- Anti-abus retenu (option A) : honeypot (`ne_pas_remplir`, erreur générique) **plus une règle de limitation de débit dans le pare-feu Vercel, à créer par Nicolas** : méthode POST sur `/` et `/contact`, fenêtre fixe de 10 minutes, 5 requêtes par IP. Elle n'est ni dans le dépôt ni testable en local. Tant qu'elle n'est pas créée, le formulaire n'a que le honeypot.
+- Choix actés : champs HTML natifs (pas de shadcn) ; obligatoires : nom, email, type de structure, consentement ; `traiter.ts` est indépendant de Next et de Resend pour être testé ; Zod n'est chargé qu'à la première interaction avec le formulaire (`champs.ts` ne doit pas l'importer) ; lien de confidentialité en nouvel onglet ; erreurs en jeton `danger` ; liens du header et CTA en `/#…` ; barre CTA mobile masquée sur `/contact` (`data-sans-cta-mobile`).
+- `CONTACT_TO_EMAIL` est l'adresse personnelle de Nicolas pour le moment, uniquement dans `.env.local` / Vercel, jamais dans le dépôt.
+- **Envoi réel testé en local** (25 novembre 2026) : accepté par Resend, états « chargement » et « succès » vérifiés. `.env.local` ne contenait pas `CONTACT_FROM_EMAIL` : à ajouter (`onboarding@resend.dev` tant qu'aucun domaine n'est vérifié).
+- Développement : `.env.local`. Clés de production : uniquement dans Vercel, portée Production (règle 10 inchangée).
+- LCP simulé par Lighthouse en local sur `/` : 2,67 s (budget 2,5 s) ; 1,8 s avec bridage DevTools ; JS 160 Ko.
+- `next` et `eslint-config-next` mis à jour en 16.4.6 (sécurité). Reste une alerte « moderate » sur `minimatch`, via `shadcn` (outil de développement), non traitée.
+- Avertissement de build connu depuis la session 2 : `:target-current` non reconnu par le minifieur CSS (le repère de section active fonctionne).
+- À vérifier avec le client avant mise en ligne : le plan Hobby de Vercel est réservé à un usage non commercial.
+- Décisions du 25 novembre 2026 : jetons de la session 1 **validés** ; §4.8 (photobiomodulation) et page `/cgu` **abandonnés** ; règle de limitation de débit à créer plus tard dans Vercel (avant la mise en ligne).
