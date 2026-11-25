@@ -6,6 +6,7 @@
 //   - usages de VisuelProvisoire (hors sa définition)
 //   - fichiers dans public/provisoire/
 //   - termes interdits dans src/content/
+//   - NEXT_PUBLIC_SITE_URL absente (URL canoniques, sitemap)
 // Hors production : informe, sort avec 0.
 // Les termes « à signaler » sont toujours de simples avertissements.
 
@@ -117,6 +118,11 @@ if (existsSync(dossierProvisoire) && statSync(dossierProvisoire).isDirectory()) 
   for (const chemin of lister(dossierProvisoire)) {
     bloquants.push(`${rel(chemin)}  fichier provisoire`);
   }
+}
+
+// --- URL publique : sans elle, canoniques et sitemap pointeraient vers localhost.
+if (!process.env.NEXT_PUBLIC_SITE_URL) {
+  bloquants.push("NEXT_PUBLIC_SITE_URL  non définie dans l'environnement du build");
 }
 
 // --- Sortie

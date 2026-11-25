@@ -194,3 +194,20 @@ La CI a démarré pour la première fois sur la PR #4, avec deux échecs.
 - Conséquence : PageSpeed Insights, qui simule en laboratoire, peut afficher un LCP supérieur à celui de la CI.
 - **Échec Vercel sur `main`** : voulu. Le déploiement de `main` est la production, où `check-content.mjs` bloque (31 points au 25 novembre 2026). Les previews de PR passent. Le script n'est pas modifié.
 - Décision de Nicolas : **`main` reste la branche de production**. Le déploiement Vercel de `main` continuera donc d'échouer jusqu'à ce que le contenu soit complet : c'est attendu, ne pas le traiter comme une panne.
+
+### Session 4 — SEO et pages légales (branche `feat/04-seo-legal`, PR à ouvrir par Nicolas)
+- Le correctif CI est fusionné (PR #5) : les deux jobs sont verts sur GitHub.
+- Livré : `src/content/seo.ts`, `src/lib/metadonnees.ts` (titre, description, canonique, partage), `robots.ts`, `sitemap.ts`, image Open Graph et icônes générées par `next/og` (aucune dépendance), JSON-LD sur l'accueil, pages `/mentions-legales` et `/confidentialite`.
+- **Analytique non faite** : en attente du choix de Nicolas (Vercel Web Analytics recommandé, ou Plausible). Aucune dépendance ajoutée.
+- Choix actés :
+  - Export `metadata` statique par page (équivalent à `generateMetadata`, les pages n'ayant aucune donnée dynamique).
+  - Description de l'accueil composée à partir du cadrage §4.1, en `A_VERIFIER`.
+  - Sans domaine, l'URL vaut `localhost` hors production ; `check-content.mjs` bloque désormais la production si `NEXT_PUBLIC_SITE_URL` manque.
+  - Non indexable : `robots.txt` interdit tout, en plus du `noindex`.
+  - Coins blancs de `ryva-icone.png` masqués par un arrondi à la génération ; le fichier source n'est pas modifié. `favicon.ico` par défaut supprimé.
+  - La garantie est détaillée dans les mentions légales (commerciale 1 an, légale de conformité 2 ans pour un consommateur), en `A_VERIFIER`.
+  - `check:qualite` contrôle les quatre pages, plus titre, description, canonique, image de partage et JSON-LD.
+- `check:prod` : 51 points bloquants (les nouveaux viennent des pages légales, de la description et de l'URL). Les 5 avertissements sont « soulager » et « traitement » au sens du traitement des données.
+- LCP en bridage appliqué, en local : 1660 ms (médiane).
+- Avant mise en ligne : remplacer l'adresse personnelle de réception par une adresse professionnelle (son fournisseur est un sous-traitant à déclarer).
+- Consigne du 25 novembre 2026 : pour les sessions 4 et 5, Claude valide lui-même ses plans. Restent soumis à Nicolas : dépendances, données inconnues ; une PR par session.

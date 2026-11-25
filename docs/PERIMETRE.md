@@ -15,8 +15,8 @@ Une case = une chose vérifiable. On ne coche que ce qui est réellement livré 
 - [x] Site en `noindex` tant que `SITE_INDEXABLE` ne vaut pas `"true"`
 - [x] `scripts/check-content.mjs` branché en `prebuild`, bloquant en production, non bloquant ailleurs
 - [x] `npm run check:prod` (version stricte, lançable à la main)
-- [ ] GitHub Actions sur les PR : lint, typecheck, build
-- [ ] Lighthouse CI avec budgets LCP < 2,5 s et CLS < 0,1, exécuté sur les PR
+- [x] GitHub Actions sur les PR : lint, typecheck, build
+- [x] Lighthouse CI avec budgets LCP < 2,5 s et CLS < 0,1, exécuté sur les PR
 - [x] Preview deploy automatique sur chaque PR (Vercel)
 
 ## 2. Contenu typé et identité (S1)
@@ -44,7 +44,7 @@ Une case = une chose vérifiable. On ne coche que ce qui est réellement livré 
 - [x] 4.10 Caractéristiques techniques (tableau, valeurs manquantes en `A_COMPLETER`)
 - [x] 4.11 FAQ en accordéon (questions du cadrage ; réponses non fournies en `A_COMPLETER`)
 - [x] Animations CSS discrètes, `prefers-reduced-motion` respecté
-- [ ] Rien dans cette session ne dégrade LCP ni CLS
+- [x] Rien dans cette session ne dégrade LCP ni CLS
 - ~~4.8 Encart photobiomodulation : non construit tant que la fonction n'est pas confirmée sur le produit~~ — **abandonné** (décision de Nicolas, 25 novembre 2026)
 
 ## 4. Contact (S3)
@@ -64,13 +64,13 @@ Une case = une chose vérifiable. On ne coche que ce qui est réellement livré 
 
 ## 5. SEO et pages légales (S4)
 
-- [ ] `generateMetadata` par page, titres et descriptions rédigés à la main
-- [ ] Image Open Graph 1200 × 630
-- [ ] Favicon et icône d'application depuis `ryva-icone.png`
-- [ ] JSON-LD `Organization` et `Product` (sans prix ni avis inventés)
-- [ ] `sitemap.ts` et `robots.ts`
-- [ ] `/mentions-legales` : structure complète, champs d'identité en `A_COMPLETER`
-- [ ] `/confidentialite` : finalité, base légale, durée de conservation, droits RGPD, responsable de traitement
+- [x] `generateMetadata` par page, titres et descriptions rédigés à la main
+- [x] Image Open Graph 1200 × 630
+- [x] Favicon et icône d'application depuis `ryva-icone.png`
+- [x] JSON-LD `Organization` et `Product` (sans prix ni avis inventés)
+- [x] `sitemap.ts` et `robots.ts`
+- [x] `/mentions-legales` : structure complète, champs d'identité en `A_COMPLETER`
+- [x] `/confidentialite` : finalité, base légale, durée de conservation, droits RGPD, responsable de traitement
 - [ ] Analytique sans cookie, aucun bandeau de consentement nécessaire
 - ~~`/cgu` : non construite, utile seulement si un service est fourni en ligne~~ — **abandonné** (décision de Nicolas, 25 novembre 2026)
 

@@ -35,8 +35,6 @@ export interface TitresSections {
 export interface SiteContent {
   langue: string;
   nom: string;
-  titre: string;
-  description: string;
   titres: TitresSections;
   /** Contenu principal : cible du lien d'évitement. */
   idContenu: string;
@@ -55,8 +53,6 @@ export interface SiteContent {
 export const site: SiteContent = {
   langue: "fr",
   nom: "RYVA",
-  titre: "RYVA",
-  description: A_COMPLETER("description du site (balise meta)"),
   titres: {
     chiffres: "Chiffres clés",
     technologies: "Les technologies",

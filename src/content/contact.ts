@@ -24,7 +24,6 @@ export type NomChamp =
 export interface ContenuContact {
   /** Titre de la section et de la page /contact. */
   titre: string;
-  metaTitre: string;
   champs: Record<NomChamp, string>;
   mentionFacultatif: string;
   choisirStructure: string;
@@ -59,7 +58,6 @@ export interface ContenuContact {
 
 export const contact: ContenuContact = {
   titre: "Demander une démo",
-  metaTitre: "Demander une démo",
   champs: {
     nom: "Nom",
     email: "Adresse email",
