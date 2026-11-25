@@ -144,7 +144,7 @@ Registre tenu à jour en fin de chaque session. Le détail des cases se lit dans
   - `next.config.ts` garde la règle Turbopack `@tailwindcss/turbopack` (le projet n'a pas `@tailwindcss/postcss`). `cacheComponents` et `partialPrefetching` ont été retirés.
   - Le paquet `cn`, `button.tsx` et `src/lib/utils.ts` ont été supprimés. Un `cn` (`clsx` + `tailwind-merge`) reviendra avec le premier composant shadcn, sur accord.
 - Toujours en attente, côté Nicolas : protection de `main`, vérification des previews Vercel.
-- Pas de Chrome sur le poste : Lighthouse ne tourne pas en local (Edge refuse le mode headless). Il tourne sur GitHub.
+- Pas de Chrome sur le poste : Lighthouse CI tourne sur GitHub. En local, `lighthouse` installé hors du projet sait piloter Edge.
 
 ### Session 1 — Contenu typé, jetons, header, hero (fusionnée dans `main`, PR #2)
 Branche `feat/01-contenu-tokens`. Nicolas commite, pousse et ouvre la PR lui-même.
@@ -170,11 +170,11 @@ Branche `feat/01-contenu-tokens`. Nicolas commite, pousse et ouvre la PR lui-mê
   - Sections numérotées par un compteur CSS (le numéro suit l'ordre de la page).
   - Les titres h2 sont dans `site.titres` ; les ancres dans `ancres` (`site.ts`).
 - Contrôles automatiques ajoutés : `npm run check:qualite` (`scripts/check-qualite.mjs`, à lancer après le build, branché dans `ci.yml`) : couleurs en dur, `px`, une seule h1, titres sans saut, images avec alt, sections nommées, ancres existantes, noindex. L'ancre `#contact` est tolérée en avertissement jusqu'à la session 3 : **retirer `ANCRES_EN_ATTENTE` du script quand le formulaire existera.**
-- **CI jamais exécutée (cause connue, côté compte GitHub) :** tous les runs des PR #1 à #3 sont en `startup_failure` avec le message « The job was not started because recent account payments have failed or your spending limit needs to be increased ». Les workflows sont valides (YAML et validateur) : il n'y a rien à corriger dans le dépôt. À régler dans GitHub, Billing & plans. Tant que ce n'est pas fait, lancer en local avant chaque push : `npm run lint && npm run typecheck && npm run build && npm run check:qualite`.
-- LCP : mesuré à 109 ms sans bridage, 0,9 à 1,7 s avec le bridage DevTools de Lighthouse, mais la simulation de Lighthouse donne 2,4 à 2,6 s en local (Edge, Windows), même avec le hero seul. Le budget de 2,5 s est donc incertain tant que la CI n'a pas tourné. Leviers testés sans effet : polices en `display: optional`, `preload: false` sur Geist Mono, `inlineCss`. Gardé : `sizes` sur les logos.
+- Les runs des PR #1 à #3 n'ont jamais démarré (`startup_failure`, blocage côté compte GitHub, levé depuis : voir « Correctif CI »).
+- LCP : mesuré à 109 ms sans bridage, 0,9 à 1,7 s avec le bridage DevTools de Lighthouse, mais la simulation de Lighthouse donne 2,4 à 2,6 s en local (Edge, Windows), même avec le hero seul. Leviers testés sans effet : polices en `display: optional`, `preload: false` sur Geist Mono, `inlineCss`. Gardé : `sizes` sur les logos.
 - Lighthouse local (Edge via `lighthouse` installé hors du projet) : accessibilité 100, bonnes pratiques 100, SEO 63 (le `noindex` volontaire fait échouer « page explorable »).
 
-### Session 3 — Formulaire de contact (branche `feat/03-contact`, PR à ouvrir par Nicolas)
+### Session 3 — Formulaire de contact (fusionnée dans `main`, PR #4)
 - Livré : `src/content/contact.ts`, `src/lib/contact/` (`champs`, `schema`, `email`, `traiter`, `action`), `src/components/contact/` (formulaire et section), page `/contact`, tests `npm test` (lanceur intégré à Node, aucune dépendance), branchés dans `ci.yml`.
 - Anti-abus retenu (option A) : honeypot (`ne_pas_remplir`, erreur générique) **plus une règle de limitation de débit dans le pare-feu Vercel, à créer par Nicolas** : méthode POST sur `/` et `/contact`, fenêtre fixe de 10 minutes, 5 requêtes par IP. Elle n'est ni dans le dépôt ni testable en local. Tant qu'elle n'est pas créée, le formulaire n'a que le honeypot.
 - Choix actés : champs HTML natifs (pas de shadcn) ; obligatoires : nom, email, type de structure, consentement ; `traiter.ts` est indépendant de Next et de Resend pour être testé ; Zod n'est chargé qu'à la première interaction avec le formulaire (`champs.ts` ne doit pas l'importer) ; lien de confidentialité en nouvel onglet ; erreurs en jeton `danger` ; liens du header et CTA en `/#…` ; barre CTA mobile masquée sur `/contact` (`data-sans-cta-mobile`).
@@ -186,3 +186,11 @@ Branche `feat/01-contenu-tokens`. Nicolas commite, pousse et ouvre la PR lui-mê
 - Avertissement de build connu depuis la session 2 : `:target-current` non reconnu par le minifieur CSS (le repère de section active fonctionne).
 - À vérifier avec le client avant mise en ligne : le plan Hobby de Vercel est réservé à un usage non commercial.
 - Décisions du 25 novembre 2026 : jetons de la session 1 **validés** ; §4.8 (photobiomodulation) et page `/cgu` **abandonnés** ; règle de limitation de débit à créer plus tard dans Vercel (avant la mise en ligne).
+
+### Correctif CI (branche `fix/ci`, PR à ouvrir par Nicolas)
+La CI a démarré pour la première fois sur la PR #4, avec deux échecs.
+- **Typecheck** (`Cannot find name 'LayoutProps'`) : ce type est généré par Next et le typecheck tourne avant le build. Le script est désormais `next typegen && tsc --noEmit`. Utiliser `npm run typecheck`, pas `tsc` seul sur un clone neuf.
+- **LCP** (2622 ms pour un budget de 2500 ms) : le texte du hero est peint dès le premier affichage ; l'écart vient du modèle de simulation de Lighthouse, qui compte le JavaScript déjà téléchargé comme un préalable à ce texte. Choix validé par Nicolas : `throttlingMethod: "devtools"` dans `lighthouserc.json` (bridage réellement appliqué). Budget inchangé et toujours bloquant. Médianes locales sur `/` : 2666 ms en simulation, 1683 ms en bridage appliqué ; sans le formulaire, encore 2576 ms en simulation (le différer ne suffisait pas).
+- Conséquence : PageSpeed Insights, qui simule en laboratoire, peut afficher un LCP supérieur à celui de la CI.
+- **Échec Vercel sur `main`** : voulu. Le déploiement de `main` est la production, où `check-content.mjs` bloque (31 points au 25 novembre 2026). Les previews de PR passent. Le script n'est pas modifié.
+- Décision de Nicolas : **`main` reste la branche de production**. Le déploiement Vercel de `main` continuera donc d'échouer jusqu'à ce que le contenu soit complet : c'est attendu, ne pas le traiter comme une panne.
