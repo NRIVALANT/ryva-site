@@ -1,4 +1,3 @@
-import { A_COMPLETER } from "./marqueurs";
 import { site } from "./site";
 
 export interface LienLegal {
@@ -19,12 +18,6 @@ export interface PageLegale {
 
 export interface LegalContent {
   liens: LienLegal[];
-  /** Identité de l'éditeur : tout est à fournir (mentions légales, session 4). */
-  editeur: {
-    raisonSociale: string;
-    siret: string;
-    directeurPublication: string;
-  };
 }
 
 export const legal: LegalContent = {
@@ -32,17 +25,11 @@ export const legal: LegalContent = {
     { libelle: "Mentions légales", href: "/mentions-legales" },
     { libelle: "Politique de confidentialité", href: "/confidentialite" },
   ],
-  editeur: {
-    raisonSociale: A_COMPLETER("raison sociale de l'éditeur"),
-    siret: A_COMPLETER("numéro SIRET"),
-    directeurPublication: A_COMPLETER("directeur de la publication"),
-  },
 };
 
-const { editeur } = legal;
-
 /**
- * Textes validés par Nicolas, non relus par un juriste ; identité et durées à fournir (A_COMPLETER).
+ * Textes validés par Nicolas, non relus par un juriste ; identité de l'éditeur, téléphone de l'hébergeur, durée de conservation
+ * et messagerie de réception non publiés (décision de Nicolas, 27 novembre 2026).
  * Hébergeur et sous-traitants : relevés sur vercel.com/legal et resend.com/legal le 25 novembre 2026.
  */
 export const pagesLegales: Record<"mentionsLegales" | "confidentialite", PageLegale> = {
@@ -52,12 +39,8 @@ export const pagesLegales: Record<"mentionsLegales" | "confidentialite", PageLeg
       {
         titre: "Éditeur du site",
         donnees: [
-          { libelle: "Raison sociale", valeur: editeur.raisonSociale },
-          { libelle: "Forme juridique et capital", valeur: A_COMPLETER("forme juridique et capital social") },
-          { libelle: "SIRET", valeur: editeur.siret },
           { libelle: "Adresse email", valeur: site.coordonnees.email },
           { libelle: "Téléphone", valeur: site.coordonnees.telephone },
-          { libelle: "Directeur de la publication", valeur: editeur.directeurPublication },
         ],
       },
       {
@@ -69,7 +52,6 @@ export const pagesLegales: Record<"mentionsLegales" | "confidentialite", PageLeg
             valeur: "440 N Barranca Avenue #4133, Covina, CA 91723, États-Unis",
           },
           { libelle: "Contact", valeur: "privacy@vercel.com" },
-          { libelle: "Téléphone", valeur: A_COMPLETER("numéro de téléphone de l'hébergeur") },
         ],
       },
       {
@@ -92,7 +74,6 @@ export const pagesLegales: Record<"mentionsLegales" | "confidentialite", PageLeg
       {
         titre: "Responsable du traitement",
         donnees: [
-          { libelle: "Raison sociale", valeur: editeur.raisonSociale },
           {
             libelle: "Contact pour les données personnelles",
             valeur: site.coordonnees.email,
@@ -113,19 +94,11 @@ export const pagesLegales: Record<"mentionsLegales" | "confidentialite", PageLeg
         ],
       },
       {
-        titre: "Durée de conservation",
-        paragraphes: [A_COMPLETER("durée de conservation des demandes reçues par email")],
-      },
-      {
         titre: "Destinataires et sous-traitants",
         donnees: [
           { libelle: "Destinataire", valeur: "L'éditeur du site." },
           { libelle: "Hébergement du site", valeur: "Vercel Inc., États-Unis" },
           { libelle: "Envoi des emails", valeur: "Resend (Plus Five Five, Inc.), États-Unis" },
-          {
-            libelle: "Messagerie de réception",
-            valeur: A_COMPLETER("fournisseur de la messagerie qui reçoit les demandes"),
-          },
         ],
       },
       {

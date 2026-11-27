@@ -15,8 +15,6 @@
 
 | À fournir | Où |
 |---|---|
-| Raison sociale, forme et capital, SIRET, directeur de la publication | `legal.ts` |
-| Téléphone de l'hébergeur, durée de conservation des demandes, messagerie de réception | `legal.ts` |
 | `NEXT_PUBLIC_SITE_URL` | Vercel |
 
 ## Décisions de Nicolas (27 novembre 2026)
@@ -28,7 +26,7 @@
 
 ## Étapes de mise en production, dans l'ordre
 
-1. Compléter les mentions légales jusqu'à ce que `npm run check:prod` ne signale plus que `NEXT_PUBLIC_SITE_URL`.
+1. Réintégrer les mentions légales retirées dès qu'elles sont connues (voir Risques résiduels).
 2. Resend : vérifier le domaine d'envoi (DNS fournis par Resend). Sans cela, le formulaire ne peut écrire qu'à l'adresse du compte Resend.
 3. Vercel : rattacher le domaine ; vérifier que le plan autorise un usage commercial (Hobby est réservé à un usage non commercial, à confirmer dans les conditions).
 4. Vercel, Settings → Environment Variables, portée **Production** : `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL`, `NEXT_PUBLIC_SITE_URL` (sans slash final), `SITE_INDEXABLE` = `true`.
@@ -37,6 +35,7 @@
 
 ## Risques résiduels
 
+- **Mentions légales incomplètes** (retirées à la demande de Nicolas) : ni raison sociale, forme, capital, SIRET, directeur de la publication, téléphone de l'hébergeur ; ni durée de conservation ni messagerie de réception dans la politique de confidentialité. Ces informations sont en principe obligatoires (LCEN, RGPD).
 - **Dépôt GitHub public** : les photos originales, gravure tierce comprise, restent dans l'historique (commit `fc9d226`) même après leur retrait. Passer le dépôt en privé, ou réécrire l'historique.
 - **Contre-indications absentes** : risque pour les utilisateurs et pour votre responsabilité.
 - **Limitation de débit absente** : seul le honeypot protège le formulaire ; un abus peut épuiser le quota Resend.

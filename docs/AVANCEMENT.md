@@ -109,3 +109,4 @@ La consigne de validation autonome des plans ne valait que pour les sessions 4 e
 - Écarts au cadrage : bénéfices réécrits sans termes médicaux (le troisième ne parle plus de digestion ni de poids) ; « cellules » et « antimicrobiennes » retirés ; FAQ remplacée par des questions répondant avec les données de la source ; lignes de caractéristiques inconnues retirées ; contre-indications et mention dispositif médical retirées du footer.
 - Garde-fou renforcé : les contre-indications sont exigées en production. `check:prod` : de 51 à 14 points.
 - Clôture (27 novembre 2026) : contact provisoire, adresse retirée, FAQ prix et livraison, « brevetée » rétabli, contre-indications en simple avertissement, périmètre coché avec la mention de ce qui est reporté.
+- Après clôture (27 novembre 2026) : les 7 rubriques légales sans réponse sont retirées à la demande de Nicolas, pour débloquer la production.

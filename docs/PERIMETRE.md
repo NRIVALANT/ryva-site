@@ -94,7 +94,7 @@ Une case = une chose vérifiable. On ne coche que ce qui est réellement livré 
 - [x] FAQ et caractéristiques limitées aux données connues
 - [x] Technologies, fonctionnement et technologie détaillée regroupés ; mise en page deux colonnes sur grand écran
 - [x] Contre-indications — **non publiées** (décision de Nicolas) : rappel non bloquant à chaque build
-- [x] Coordonnées provisoires renseignées — identité légale **encore manquante** (bloque la production)
+- [x] Coordonnées provisoires renseignées — identité légale **non publiée** (décision de Nicolas)
 
 ---
 
@@ -118,5 +118,5 @@ Une case = une chose vérifiable. On ne coche que ce qui est réellement livré 
 - [x] Coordonnées : email et téléphone provisoires, pas d'adresse
 - [x] Preuve sociale : aucune pour le moment, avis clients plus tard
 - [x] Pas de mention « dispositif médical »
-- [ ] Identité légale : raison sociale, forme et capital, SIRET, directeur de la publication
-- [ ] Téléphone de l'hébergeur, durée de conservation des demandes, messagerie de réception
+- [ ] Identité légale : raison sociale, forme et capital, SIRET, directeur de la publication (retirée des pages, à réintégrer)
+- [ ] Téléphone de l'hébergeur, durée de conservation des demandes, messagerie de réception (retirés des pages, à réintégrer)

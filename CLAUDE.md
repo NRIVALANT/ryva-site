@@ -146,7 +146,8 @@ Server Action + validation Zod (schéma partagé avec le formulaire client) + Re
 
 Sessions 0 à 6 terminées (la 6 est la dernière). Détail dans `docs/AVANCEMENT.md`, à tenir à jour en fin de session ; ne garder ici que les décisions en vigueur.
 
-- **`main` est la production Vercel** : son déploiement échoue tant que le contenu est incomplet. C'est attendu, ne pas le traiter comme une panne ni modifier `check-content.mjs` pour passer.
+- **`main` est la production Vercel** : le garde-fou y est bloquant. Ne pas modifier `check-content.mjs` pour passer.
+- Mentions légales et politique de confidentialité **incomplètes** : lignes sans réponse retirées le 27 novembre 2026 à la demande de Nicolas. À réintégrer, jamais à inventer.
 - **Limitation de débit** : reportée (décision du 27 novembre 2026), à revoir selon la fréquentation. Seul le honeypot protège le formulaire.
 - **Plan Vercel Hobby** : réservé à un usage non commercial, à vérifier avant la mise en ligne.
 - **Adresse de réception** (`CONTACT_TO_EMAIL`) : personnelle pour le moment, à remplacer avant la mise en ligne ; jamais dans le dépôt.
