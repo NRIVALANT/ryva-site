@@ -71,7 +71,7 @@ Une case = une chose vérifiable. On ne coche que ce qui est réellement livré 
 - [x] `sitemap.ts` et `robots.ts`
 - [x] `/mentions-legales` : structure complète, champs d'identité en `A_COMPLETER`
 - [x] `/confidentialite` : finalité, base légale, durée de conservation, droits RGPD, responsable de traitement
-- [ ] Analytique sans cookie, aucun bandeau de consentement nécessaire
+- [x] Analytique sans cookie, aucun bandeau de consentement nécessaire
 - ~~`/cgu` : non construite, utile seulement si un service est fourni en ligne~~ — **abandonné** (décision de Nicolas, 25 novembre 2026)
 
 ## 6. Qualité et mise en production (S5)

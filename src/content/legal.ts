@@ -170,7 +170,11 @@ export const pagesLegales: Record<"mentionsLegales" | "confidentialite", PageLeg
       },
       {
         titre: "Cookies",
-        paragraphes: [A_VERIFIER("Ce site ne dépose aucun cookie publicitaire ni de mesure d'audience.")],
+        paragraphes: [
+          A_VERIFIER(
+            "Ce site ne dépose pas de cookie. Sa fréquentation est mesurée avec Vercel Web Analytics, sans cookie, sous forme de statistiques (pages vues, provenance, type d'appareil, pays).",
+          ),
+        ],
       },
     ],
   },

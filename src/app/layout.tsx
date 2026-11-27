@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import { CtaMobile } from "@/components/layout/cta-mobile";
 import { Footer } from "@/components/layout/footer";
 import { Header } from "@/components/layout/header";
@@ -49,6 +50,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </main>
         <Footer />
         <CtaMobile />
+        {/* Mesure d'audience sans cookie. Le script n'existe que sur Vercel : ailleurs il répondrait 404. */}
+        {process.env.VERCEL && <Analytics />}
       </body>
     </html>
   );

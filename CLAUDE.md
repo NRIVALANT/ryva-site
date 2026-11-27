@@ -198,7 +198,7 @@ La CI a démarré pour la première fois sur la PR #4, avec deux échecs.
 ### Session 4 — SEO et pages légales (branche `feat/04-seo-legal`, PR à ouvrir par Nicolas)
 - Le correctif CI est fusionné (PR #5) : les deux jobs sont verts sur GitHub.
 - Livré : `src/content/seo.ts`, `src/lib/metadonnees.ts` (titre, description, canonique, partage), `robots.ts`, `sitemap.ts`, image Open Graph et icônes générées par `next/og` (aucune dépendance), JSON-LD sur l'accueil, pages `/mentions-legales` et `/confidentialite`.
-- **Analytique non faite** : en attente du choix de Nicolas (Vercel Web Analytics recommandé, ou Plausible). Aucune dépendance ajoutée.
+- Analytique : **Vercel Web Analytics** (`@vercel/analytics`, accord de Nicolas à condition que ce soit gratuit). Gratuit sur Hobby jusqu'à 50 000 événements par mois, sans surfacturation ; pas d'événements personnalisés sur ce plan. Sur Pro, les événements sont facturés (0,03 $ les 1 000, imputés sur le crédit mensuel). Le script n'est rendu que sur Vercel. **À activer par Nicolas** dans le tableau de bord (projet, onglet Analytics).
 - Choix actés :
   - Export `metadata` statique par page (équivalent à `generateMetadata`, les pages n'ayant aucune donnée dynamique).
   - Description de l'accueil composée à partir du cadrage §4.1, en `A_VERIFIER`.
