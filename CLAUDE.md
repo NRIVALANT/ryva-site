@@ -144,13 +144,16 @@ Server Action + validation Zod (schéma partagé avec le formulaire client) + Re
 
 ## Avancement
 
-Sessions 0 à 5 terminées et fusionnées. Détail dans `docs/AVANCEMENT.md`, à tenir à jour en fin de session ; ne garder ici que les décisions en vigueur.
+Sessions 0 à 6 terminées (la 6 est la dernière). Détail dans `docs/AVANCEMENT.md`, à tenir à jour en fin de session ; ne garder ici que les décisions en vigueur.
 
 - **`main` est la production Vercel** : son déploiement échoue tant que le contenu est incomplet. C'est attendu, ne pas le traiter comme une panne ni modifier `check-content.mjs` pour passer.
-- **Limitation de débit** : règle à créer par Nicolas dans le pare-feu Vercel avant la mise en ligne (POST sur `/` et `/contact`, fenêtre fixe de 10 minutes, 5 requêtes par IP). D'ici là, seul le honeypot protège le formulaire.
+- **Limitation de débit** : reportée (décision du 27 novembre 2026), à revoir selon la fréquentation. Seul le honeypot protège le formulaire.
 - **Plan Vercel Hobby** : réservé à un usage non commercial, à vérifier avant la mise en ligne.
 - **Adresse de réception** (`CONTACT_TO_EMAIL`) : personnelle pour le moment, à remplacer avant la mise en ligne ; jamais dans le dépôt.
 - Typecheck : `npm run typecheck` (génère d'abord les types de Next), pas `tsc` seul sur un clone neuf.
 - Lighthouse CI mesure en bridage appliqué (`devtools`), pas en simulation.
 - `src/lib/contact/champs.ts` ne doit pas importer Zod (chargé à la première saisie).
 - Direction visuelle **B (futuriste sombre)**. §4.8 (photobiomodulation) et `/cgu` abandonnés.
+- Photos : originaux dans `photos-source/` (ignoré par git, marque tierce visible) ; seuls les recadrages de `public/images/` sont publiés. Ne pas publier le panneau de commande (il porte la marque).
+- Contre-indications non publiées (décision de Nicolas) : avertissement non bloquant dans `check-content.mjs`. Ne jamais les rédiger.
+- Textes validés par Nicolas le 27 novembre 2026, non relus par un juriste. « brevetée » validé par Nicolas. Distributeur sous marque propre, prix sur devis, pas de relecture juridique prévue.

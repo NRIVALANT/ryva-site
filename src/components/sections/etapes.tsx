@@ -9,7 +9,7 @@ import { steps } from "@/content/steps";
  */
 export function Etapes() {
   return (
-    <Section id={ancres.etapes} titre={site.titres.etapes}>
+    <Section id={ancres.etapes} titre={site.titres.etapes} colonnes>
       <ol className="jauge flex flex-col gap-12 [--jauge-decalage:1.75rem] md:gap-16 md:[--jauge-decalage:2.5rem]">
         {steps.map((etape) => (
           <li

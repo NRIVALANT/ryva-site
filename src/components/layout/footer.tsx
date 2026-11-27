@@ -24,7 +24,6 @@ export function Footer() {
           <address className="flex flex-col gap-1 not-italic texte-corps text-texte-secondaire">
             <span>{site.coordonnees.email}</span>
             <span>{site.coordonnees.telephone}</span>
-            <span>{site.coordonnees.adresse}</span>
           </address>
         </div>
 
@@ -33,8 +32,6 @@ export function Footer() {
             {ui.footer.titreRappels}
           </h2>
           <ul className="flex flex-col gap-2 texte-corps text-texte-secondaire">
-            <li>{legal.rappelContreIndications}</li>
-            <li>{legal.dispositifMedical}</li>
             <li>{benefits.reserve}</li>
           </ul>
         </div>

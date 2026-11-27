@@ -44,3 +44,6 @@ next-env.d.ts
 
 # lighthouse ci
 .lighthouseci/
+
+# photos originales (marque tierce visible : jamais commitées)
+photos-source/

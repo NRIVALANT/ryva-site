@@ -10,7 +10,7 @@ import { ui } from "@/content/ui";
  */
 export function Caracteristiques() {
   return (
-    <Section id={ancres.caracteristiques} titre={site.titres.caracteristiques}>
+    <Section id={ancres.caracteristiques} titre={site.titres.caracteristiques} colonnes>
       <table className="revele w-full max-w-4xl border-collapse text-left">
         <caption className="sr-only">{site.titres.caracteristiques}</caption>
         <thead className="sr-only">

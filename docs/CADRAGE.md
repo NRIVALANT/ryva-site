@@ -69,10 +69,10 @@ Les textes de cette section vivent désormais dans `src/content/`. Les numéros 
 | 4.1 | Hero | `hero.ts` |
 | 4.2 | Chiffres clés | `stats.ts` |
 | 4.3 | Les technologies | `technologies.ts` |
-| 4.4 | Comment ça fonctionne | `technologies.ts` |
+| 4.4 | Comment ça fonctionne | réuni à 4.3 (session 6) |
 | 4.5 | Les 4 étapes | `steps.ts` |
 | 4.6 | Bénéfices et mention de réserve | `benefits.ts` |
-| 4.7 | Technologie détaillée | `technologies.ts` |
+| 4.7 | Technologie détaillée | réunie à 4.3 (session 6) |
 | 4.8 | Encart photobiomodulation | abandonné, non construit |
 | 4.9 | Pour qui | `segments.ts` |
 | 4.10 | Caractéristiques techniques | `specs.ts` |

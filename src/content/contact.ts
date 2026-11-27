@@ -1,5 +1,3 @@
-import { A_VERIFIER } from "./marqueurs";
-
 /** Types de structure (CADRAGE §4.12). La valeur est envoyée, le libellé est affiché. */
 export const typesStructure = [
   { valeur: "clinique", libelle: "Clinique" },
@@ -70,10 +68,8 @@ export const contact: ContenuContact = {
   mentionFacultatif: "facultatif",
   choisirStructure: "Choisissez…",
   consentement: {
-    // Texte RGPD à valider par un juriste avant publication.
-    texte: A_VERIFIER(
-      "J'accepte que les informations saisies soient utilisées pour répondre à ma demande.",
-    ),
+    // Texte RGPD validé par Nicolas, non relu par un juriste.
+    texte: "J'accepte que les informations saisies soient utilisées pour répondre à ma demande.",
     lien: { libelle: "Politique de confidentialité", href: "/confidentialite" },
   },
   libellePiege: "Ne pas remplir",

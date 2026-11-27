@@ -8,7 +8,7 @@
 //   - termes interdits dans src/content/
 //   - NEXT_PUBLIC_SITE_URL absente (URL canoniques, sitemap)
 // Hors production : informe, sort avec 0.
-// Les termes « à signaler » sont toujours de simples avertissements.
+// Les termes « à signaler » sont toujours de simples avertissements, comme l'absence des contre-indications.
 
 import { readdirSync, readFileSync, existsSync, statSync } from "node:fs";
 import { join, relative, sep } from "node:path";
@@ -123,6 +123,11 @@ if (existsSync(dossierProvisoire) && statSync(dossierProvisoire).isDirectory()) 
 // --- URL publique : sans elle, canoniques et sitemap pointeraient vers localhost.
 if (!process.env.NEXT_PUBLIC_SITE_URL) {
   bloquants.push("NEXT_PUBLIC_SITE_URL  non définie dans l'environnement du build");
+}
+
+// --- Contre-indications : rappel à chaque build tant qu'elles manquent (non bloquant, décision du 27 novembre 2026).
+if (!/question:[ ]*"[^"]*contre-indications/i.test(readFileSync(join(racine, "src", "content", "faq.ts"), "utf8"))) {
+  avertissements.push("src/content/faq.ts  contre-indications du fabricant ABSENTES (risque santé et responsabilité)");
 }
 
 // --- Sortie

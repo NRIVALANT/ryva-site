@@ -10,7 +10,7 @@ import { ancres, site } from "@/content/site";
  */
 export function Faq() {
   return (
-    <Section id={ancres.faq} titre={site.titres.faq} fond="surface">
+    <Section id={ancres.faq} titre={site.titres.faq} fond="surface" colonnes>
       <div className="revele max-w-3xl border-b border-bordure">
         {faq.map((entree) => (
           <details key={entree.question} name="faq" className="accordeon group border-t border-bordure">

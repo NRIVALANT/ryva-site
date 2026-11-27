@@ -1,5 +1,3 @@
-import { A_VERIFIER } from "./marqueurs";
-
 export interface PageSeo {
   chemin: "/" | "/contact" | "/mentions-legales" | "/confidentialite";
   titre: string;
@@ -11,10 +9,8 @@ export const pages = {
   accueil: {
     chemin: "/",
     titre: "Cabine RYVA | Vibrations soniques et chaleur infrarouge",
-    // Composée à partir des seuls textes du cadrage §4.1 : à valider avant publication.
-    description: A_VERIFIER(
-      "Des séances de 10 minutes combinant vibrations soniques et chaleur infrarouge réglable jusqu'à 60 °C. Pour les cliniques et les salles de sport.",
-    ),
+    // Composée à partir des seuls textes du cadrage §4.1 : validée par Nicolas.
+    description: "Des séances de 10 minutes combinant vibrations soniques et chaleur infrarouge réglable jusqu'à 60 °C. Pour les cliniques et les salles de sport.",
   },
   contact: {
     chemin: "/contact",

@@ -6,7 +6,7 @@ import { FormulaireContact } from "./formulaire-contact";
 /** Cadrage §4.12 : section de conversion en bas de la landing. Aucune animation sur le formulaire. */
 export function SectionContact() {
   return (
-    <Section id={ancres.contact} titre={contact.titre}>
+    <Section id={ancres.contact} titre={contact.titre} colonnes>
       <div className="max-w-3xl">
         <FormulaireContact textes={contact} structures={typesStructure} />
       </div>

@@ -101,3 +101,11 @@ La consigne de validation autonome des plans ne valait que pour les sessions 4 e
 | Indexation (§8) | Non précisée | `noindex` tant que `SITE_INDEXABLE` ≠ `"true"` | Rien en ligne avant que le contenu soit prêt |
 | Découpage (§11) | 8 heures de développement | 6 sessions, voir `docs/PROMPTS.md` | Même méthode que le CRM |
 | Garde-fou (§12) | Absent | `scripts/check-content.mjs` bloque la production tant qu'il reste un marqueur | Rien ne part en ligne par accident |
+
+### Session 6 — Première version finale (branche `feat/06-finale`, PR à ouvrir par Nicolas)
+- Cinq photos originales : commitées par erreur dans `public/photos/` avec la PR #9, sorties du site et du suivi (elles restent dans l'historique d'un dépôt public).
+- Publié : profil (hero), assise, panneaux chauffants, détail du bois, devise. Écarté : `image6` (rendu de mauvaise qualité). Gravure « dida doctor » exclue par recadrage ; le panneau de commande, qui la porte aussi, n'est pas montré.
+- Sections Technologies, Fonctionnement et Technologie détaillée réunies ; le menu « Fonctionnement » mène aux 4 étapes ; bandeau devise avant le formulaire ; prop `colonnes` de `Section`.
+- Écarts au cadrage : bénéfices réécrits sans termes médicaux (le troisième ne parle plus de digestion ni de poids) ; « cellules » et « antimicrobiennes » retirés ; FAQ remplacée par des questions répondant avec les données de la source ; lignes de caractéristiques inconnues retirées ; contre-indications et mention dispositif médical retirées du footer.
+- Garde-fou renforcé : les contre-indications sont exigées en production. `check:prod` : de 51 à 14 points.
+- Clôture (27 novembre 2026) : contact provisoire, adresse retirée, FAQ prix et livraison, « brevetée » rétabli, contre-indications en simple avertissement, périmètre coché avec la mention de ce qui est reporté.
