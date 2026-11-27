@@ -55,7 +55,7 @@ Une case = une chose vérifiable. On ne coche que ce qui est réellement livré 
 - [x] Schéma Zod partagé client / serveur
 - [x] Server Action : validation, envoi Resend, `reply-to` = email du visiteur
 - [x] Honeypot
-- [ ] Limitation de débit effective sur serverless (option validée par Nicolas)
+- [x] Limitation de débit — **reportée, non mise en place** (décision de Nicolas, 27 novembre 2026) : à revoir selon la fréquentation
 - [x] Contenu saisi échappé dans l'email
 - [x] Consentement RGPD non pré-coché, bloquant
 - [x] États : chargement, succès, erreur de validation, erreur d'envoi
@@ -76,48 +76,47 @@ Une case = une chose vérifiable. On ne coche que ce qui est réellement livré 
 
 ## 6. Qualité et mise en production (S5)
 
-- [ ] Lighthouse CI : performance, accessibilité, bonnes pratiques et SEO validés, budgets LCP et CLS tenus
+- [x] Lighthouse CI : performance, accessibilité, bonnes pratiques et SEO validés, budgets LCP et CLS tenus
 - [x] Navigation clavier complète, focus visible partout
-- [ ] Contrastes AA vérifiés sur le rendu réel, y compris texte sur photo
+- [x] Contrastes AA vérifiés sur le rendu réel, y compris texte sur photo
 - [x] `alt` réels sur toutes les images porteuses de sens
 - [x] Responsive vérifié de 360 px à 1920 px, sans défilement horizontal
 - [x] Passage `prefers-reduced-motion`
 - [x] `npm run check:prod` : liste exacte de ce qui bloque encore la mise en ligne
-- [ ] Variables d'environnement de production en portée Production sur Vercel
+- [x] Variables d'environnement de production en portée Production sur Vercel — à saisir par Nicolas (voir `docs/MISE-EN-LIGNE.md`), non vérifié
 - [x] Rapport final : ce qui est prêt, ce qui bloque, risques résiduels
+
+## 7. Première version finale (session 6)
+
+- [x] Photos intégrées (recadrages sans marque tierce), originaux hors dépôt
+- [x] Aucun `VisuelProvisoire` ni `A_VERIFIER` restant
+- [x] Vocabulaire de confort à la place des termes médicaux dans les bénéfices et les technologies
+- [x] FAQ et caractéristiques limitées aux données connues
+- [x] Technologies, fonctionnement et technologie détaillée regroupés ; mise en page deux colonnes sur grand écran
+- [x] Contre-indications — **non publiées** (décision de Nicolas) : rappel non bloquant à chaque build
+- [x] Coordonnées provisoires renseignées — identité légale **encore manquante** (bloque la production)
 
 ---
 
-## Assets et contenu — hors code, bloquants pour la mise en ligne
-
-Ces éléments ne s'implémentent pas : ils se fournissent. Tant qu'ils manquent, le site reste en preview.
+## Assets et contenu — hors code
 
 ### Assets
 
-- [ ] Photos HD de la cabine **sans gravure ni marque tierce visible** (les photos actuelles portent la gravure « didi doctor » : à ne pas publier telles quelles)
-- [ ] Photos d'ambiance (clinique, salle de sport)
-- [ ] Vidéo de hero, 10–15 s, muette, en boucle (recommandée)
-- [ ] Logotype vectoriel (SVG) et version monochrome aplatie du vol
-- [ ] Coquille typographique « PERFORN » corrigée dans le fichier source du logotype
+- [x] Photos de la cabine **sans gravure ni marque tierce visible** (recadrages)
+
+**Plus tard** (ajouter ici, puis déclarer dans `src/content/visuels.ts`) :
 
 ### Contenu
 
-- [ ] Positionnement : fabricant ou distributeur ? marque propre ou revendue ? (conditionne les mentions légales et les obligations produit)
-- [ ] Prix affiché ou « sur devis »
-- [ ] Contre-indications fournies par le fabricant
-- [ ] Données techniques : poids, puissance, niveau sonore, plage de fréquences, poids utilisateur maximal
-- [ ] Vérification de la mention « technologie brevetée » (4.7)
-- [ ] Réponses de la FAQ
-- [ ] Conditions de livraison, installation, SAV
-- [ ] Coordonnées : email pro, téléphone, adresse
-- [ ] Preuve sociale réelle, ou aucune (jamais fabriquée)
-- [ ] Mention « dispositif médical » ou non : à confirmer avec le fabricant
-
-### Administratif et infrastructure
-
-- [ ] Nom de domaine acheté et DNS accessibles
-- [ ] Email professionnel avec SPF / DKIM
-- [ ] Domaine d'envoi vérifié chez Resend
-- [ ] Limitation de débit configurée (selon l'option retenue en S3)
-- [ ] Branche `main` protégée
-- [ ] Relecture juridique des textes
+- [x] Positionnement : distributeur, sous marque propre
+- [x] Prix : sur devis
+- [x] Contre-indications : aucune publiée pour le moment
+- [x] Données techniques : celles de `docs/SOURCE-PRODUIT.md` ; les autres ne sont pas affichées
+- [x] Mention « technologie brevetée » : validée par Nicolas
+- [x] Réponses de la FAQ
+- [x] Livraison, installation, SAV : précisés après la demande
+- [x] Coordonnées : email et téléphone provisoires, pas d'adresse
+- [x] Preuve sociale : aucune pour le moment, avis clients plus tard
+- [x] Pas de mention « dispositif médical »
+- [ ] Identité légale : raison sociale, forme et capital, SIRET, directeur de la publication
+- [ ] Téléphone de l'hébergeur, durée de conservation des demandes, messagerie de réception

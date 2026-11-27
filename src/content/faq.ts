@@ -1,51 +1,50 @@
-import { A_COMPLETER } from "./marqueurs";
-
 export interface QuestionFaq {
   question: string;
   reponse: string;
 }
 
 /**
- * Cadrage §4.11. Une réponse n'est rédigée que si le cadrage fournit la donnée sans extrapolation.
+ * Cadrage §4.11. Chaque réponse reprend docs/SOURCE-PRODUIT.md ou une indication de Nicolas, sans extrapolation.
  * Les contre-indications ne sont jamais rédigées par le développement : elles viennent du fabricant.
  */
 export const faq: QuestionFaq[] = [
   {
-    question: "Quelles sont les contre-indications ?",
-    reponse: A_COMPLETER(
-      "contre-indications, à fournir par le fabricant (jamais rédigées par défaut)",
-    ),
+    question: "Combien de temps dure une séance ?",
+    reponse: "Une séance classique dure environ 10 minutes.",
+  },
+  {
+    question: "Jusqu'à quelle température la cabine chauffe-t-elle ?",
+    reponse: "La température est réglable jusqu'à 60 °C.",
+  },
+  {
+    question: "Peut-on adapter la séance ?",
+    reponse:
+      "Oui. L'intensité des vibrations, leur fréquence et la température se règlent grâce aux commandes situées à l'extérieur.",
   },
   {
     question: "Quelle installation électrique faut-il prévoir ?",
     reponse:
-      "Fonctionne sur une prise domestique de 10 A, ce qui facilite l'installation en maison, clinique ou espace professionnel.",
+      "La cabine fonctionne sur une prise domestique de 10 A, ce qui facilite l'installation dans une maison, une clinique ou un espace professionnel.",
   },
   {
-    question:
-      "Comment entretenir le cèdre et nettoyer entre deux utilisateurs ?",
-    reponse: A_COMPLETER("consignes d'entretien et de nettoyage"),
-  },
-  {
-    question: "Quelle est la consommation électrique par séance ?",
-    reponse: A_COMPLETER("consommation électrique par séance"),
-  },
-  {
-    question:
-      "Combien pèse la cabine, et quel accès faut-il pour la livrer ?",
-    reponse: A_COMPLETER("poids de la cabine et conditions d'accès à la livraison"),
+    question: "Quelle place faut-il prévoir ?",
+    reponse: "La cabine mesure 108 × 56 × 74 cm.",
   },
   {
     question: "À quelle fréquence l'utiliser ?",
-    reponse: A_COMPLETER("fréquence d'utilisation recommandée par le fabricant"),
+    reponse: "Le fabricant recommande une utilisation régulière.",
   },
   {
-    question:
-      "En quoi cela diffère-t-il d'un sauna infrarouge ou d'une plateforme vibrante ?",
-    reponse: A_COMPLETER("éléments de comparaison validés par le fabricant"),
+    question: "Quel est le prix ?",
+    reponse: "Le prix est communiqué sur devis.",
   },
   {
-    question: "Quels sont les délais de livraison et le SAV ?",
-    reponse: A_COMPLETER("délais de livraison et conditions du SAV"),
+    question: "Quelles sont les conditions de livraison, d'installation et de service après-vente ?",
+    reponse: "Elles vous sont précisées une fois votre demande engagée.",
+  },
+  {
+    question: "Quelle est la garantie ?",
+    reponse:
+      "Garantie commerciale du fabricant : 1 an, sans préjudice de la garantie légale de conformité.",
   },
 ];

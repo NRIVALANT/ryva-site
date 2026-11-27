@@ -1,13 +1,9 @@
-import { A_COMPLETER } from "./marqueurs";
-
 /** Identifiants d'ancre des sections de la landing (utilisés par le header, le hero et les sections). */
 export const ancres = {
   chiffres: "chiffres",
   technologies: "technologies",
-  fonctionnement: "fonctionnement",
   etapes: "etapes",
   benefices: "benefices",
-  technologieDetail: "technologie",
   pourQui: "pour-qui",
   caracteristiques: "caracteristiques",
   faq: "faq",
@@ -23,10 +19,8 @@ export interface LienNavigation {
 export interface TitresSections {
   chiffres: string;
   technologies: string;
-  fonctionnement: string;
   etapes: string;
   benefices: string;
-  technologieDetail: string;
   pourQui: string;
   caracteristiques: string;
   faq: string;
@@ -46,7 +40,6 @@ export interface SiteContent {
   coordonnees: {
     email: string;
     telephone: string;
-    adresse: string;
   };
 }
 
@@ -56,10 +49,8 @@ export const site: SiteContent = {
   titres: {
     chiffres: "Chiffres clés",
     technologies: "Les technologies",
-    fonctionnement: "Comment ça fonctionne",
-    etapes: "Les 4 étapes",
+    etapes: "Comment ça fonctionne",
     benefices: "Bénéfices mis en avant",
-    technologieDetail: "Technologie détaillée",
     pourQui: "Pour qui",
     caracteristiques: "Caractéristiques techniques",
     faq: "FAQ",
@@ -67,16 +58,16 @@ export const site: SiteContent = {
   idContenu: "contenu",
   navigation: [
     { libelle: "Technologies", href: `/#${ancres.technologies}` },
-    { libelle: "Fonctionnement", href: `/#${ancres.fonctionnement}` },
+    { libelle: "Fonctionnement", href: `/#${ancres.etapes}` },
     { libelle: "Bénéfices", href: `/#${ancres.benefices}` },
     { libelle: "Pour qui", href: `/#${ancres.pourQui}` },
     { libelle: "Caractéristiques", href: `/#${ancres.caracteristiques}` },
     { libelle: "FAQ", href: `/#${ancres.faq}` },
   ],
   ctaDemo: { libelle: "Demander une démo", href: `/#${ancres.contact}` },
+  // Contact provisoire (collègue de Nicolas), à remplacer par le contact professionnel.
   coordonnees: {
-    email: A_COMPLETER("adresse email professionnelle"),
-    telephone: A_COMPLETER("numéro de téléphone"),
-    adresse: A_COMPLETER("adresse postale"),
+    email: "lucasloisel44@icloud.com",
+    telephone: "06 84 18 12 91",
   },
 };

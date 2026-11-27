@@ -1,5 +1,3 @@
-import { A_VERIFIER } from "./marqueurs";
-
 export interface Benefice {
   titre: string;
   texte: string;
@@ -17,24 +15,22 @@ export interface BeneficesContent {
 export const benefits: BeneficesContent = {
   liste: [
     {
-      titre: "Soulagement des douleurs",
+      titre: "Confort après l'effort",
       texte:
-        "La marque présente la vibration comme pouvant diminuer la perception de la douleur pendant et après la séance, notamment chez les sportifs confrontés aux courbatures ou à certaines douleurs liées à l'effort.",
+        "La marque présente la vibration comme pouvant apporter une sensation de confort pendant et après la séance, notamment chez les sportifs après l'effort.",
     },
     {
-      titre: "Réduction du stress et de l'anxiété",
+      titre: "Détente et sommeil",
       texte:
-        "L'association des vibrations et des infrarouges est présentée comme favorisant la détente, contribuant à réduire le stress, améliorer l'humeur et favoriser une meilleure qualité de sommeil.",
+        "L'association des vibrations et des infrarouges est présentée comme favorisant la détente, la bonne humeur et la qualité du sommeil.",
     },
     {
-      titre: "Digestion et gestion du poids",
+      titre: "Relaxation et bien-être",
       texte:
-        "La marque associe l'amélioration de la circulation, la relaxation et la stimulation du système lymphatique à un possible soutien de la digestion et des efforts de gestion du poids.",
+        "La marque associe la chaleur, les vibrations et la relaxation à un possible soutien du bien-être au quotidien.",
     },
   ],
   // Reformulée par rapport au cadrage §4.6 : celui-ci emploie un verbe du vocabulaire interdit (CLAUDE.md,
-  // règle 4), même en négation. Formulation à faire valider par un juriste.
-  reserve: A_VERIFIER(
-    "Les éléments présentés ci-dessus reprennent les allégations du fabricant et ne constituent pas un avis médical. La cabine RYVA n'est pas destinée à se substituer à un avis ou à un suivi médical.",
-  ),
+  // règle 4), même en négation. Validée par Nicolas, non relue par un juriste.
+  reserve: "Les éléments présentés ci-dessus reprennent les allégations du fabricant et ne constituent pas un avis médical. La cabine RYVA n'est pas destinée à se substituer à un avis ou à un suivi médical.",
 };

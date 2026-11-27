@@ -22,7 +22,7 @@ export const steps: Etape[] = [
     numero: "03",
     titre: "La chaleur et les vibrations",
     texte:
-      "Les vibrations soniques sont conçues pour stimuler les muscles et les cellules à différentes fréquences tandis que les éléments chauffants au graphène, à la céramique et aux infrarouges produisent une chaleur profonde.",
+      "Les vibrations soniques sont conçues pour stimuler les muscles à différentes fréquences tandis que les éléments chauffants au graphène, à la céramique et aux infrarouges produisent une chaleur profonde.",
   },
   {
     numero: "04",
