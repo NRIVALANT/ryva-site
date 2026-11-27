@@ -24,6 +24,11 @@ export interface UiContent {
     colonneLibelle: string;
     colonneValeur: string;
   };
+  pageIntrouvable: {
+    titre: string;
+    texte: string;
+    retour: string;
+  };
 }
 
 export const ui: UiContent = {
@@ -50,5 +55,10 @@ export const ui: UiContent = {
   tableau: {
     colonneLibelle: "Caractéristique",
     colonneValeur: "Valeur",
+  },
+  pageIntrouvable: {
+    titre: "Page introuvable",
+    texte: "L'adresse demandée n'existe pas ou n'existe plus.",
+    retour: "Retour à l'accueil",
   },
 };

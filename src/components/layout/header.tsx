@@ -23,6 +23,7 @@ export function Header() {
             height={logo.hauteur}
             alt={ui.header.ariaAccueil}
             sizes="11rem"
+            loading="eager"
             className="h-8 w-auto"
           />
         </Link>

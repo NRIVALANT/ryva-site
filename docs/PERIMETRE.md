@@ -77,14 +77,14 @@ Une case = une chose vérifiable. On ne coche que ce qui est réellement livré 
 ## 6. Qualité et mise en production (S5)
 
 - [ ] Lighthouse CI : performance, accessibilité, bonnes pratiques et SEO validés, budgets LCP et CLS tenus
-- [ ] Navigation clavier complète, focus visible partout
+- [x] Navigation clavier complète, focus visible partout
 - [ ] Contrastes AA vérifiés sur le rendu réel, y compris texte sur photo
-- [ ] `alt` réels sur toutes les images porteuses de sens
-- [ ] Responsive vérifié de 360 px à 1920 px, sans défilement horizontal
-- [ ] Passage `prefers-reduced-motion`
+- [x] `alt` réels sur toutes les images porteuses de sens
+- [x] Responsive vérifié de 360 px à 1920 px, sans défilement horizontal
+- [x] Passage `prefers-reduced-motion`
 - [x] `npm run check:prod` : liste exacte de ce qui bloque encore la mise en ligne
 - [ ] Variables d'environnement de production en portée Production sur Vercel
-- [ ] Rapport final : ce qui est prêt, ce qui bloque, risques résiduels
+- [x] Rapport final : ce qui est prêt, ce qui bloque, risques résiduels
 
 ---
 

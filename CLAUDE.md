@@ -211,3 +211,11 @@ La CI a démarré pour la première fois sur la PR #4, avec deux échecs.
 - LCP en bridage appliqué, en local : 1660 ms (médiane).
 - Avant mise en ligne : remplacer l'adresse personnelle de réception par une adresse professionnelle (son fournisseur est un sous-traitant à déclarer).
 - Consigne du 25 novembre 2026 : pour les sessions 4 et 5, Claude valide lui-même ses plans. Restent soumis à Nicolas : dépendances, données inconnues ; une PR par session.
+
+### Session 5 — Qualité et mise en production (branche `feat/05-qualite`, PR à ouvrir par Nicolas)
+- Sessions 4 (PR #6) et analytique (PR #7) fusionnées.
+- Rapport et étapes de mise en ligne : `docs/MISE-EN-LIGNE.md`.
+- Corrigé : focus caché sous la barre CTA mobile (`scroll-padding-bottom`) ; premier lien du menu actif en haut de page ; 404 par défaut en anglais (`not-found.tsx`, contrôlée par `check:qualite`) ; images en AVIF puis WebP ; logo du header chargé sans différé.
+- Lighthouse CI durci : quatre pages ; performance ≥ 0,90, accessibilité, bonnes pratiques et SEO ≥ 0,95, en erreur ; LCP et CLS inchangés. `is-crawlable` est ignoré (le `noindex` est volontaire).
+- Cases laissées décochées : Lighthouse CI (à cocher quand la CI de la PR est verte) ; contrastes sur rendu réel (pas encore de photo) ; variables Vercel de production.
+- La refonte de mise en page évoquée (regroupement des sections, rythme, hero) n'est pas faite : à décider par Nicolas.

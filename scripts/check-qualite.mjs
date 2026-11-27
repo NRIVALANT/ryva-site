@@ -113,6 +113,12 @@ for (const [route, page] of Object.entries(contenus)) {
   if (robots !== attendu) signaler(`meta robots « ${robots} », attendu « ${attendu} »`);
 }
 
+// ---------- Page 404 : la nôtre, en français, pas celle de Next.
+const introuvable = join(racine, ".next", "server", "app", "_not-found.html");
+if (existsSync(introuvable) && readFileSync(introuvable, "utf8").includes("This page could not be found")) {
+  erreurs.push("404 : page par défaut de Next, en anglais (src/app/not-found.tsx manquant)");
+}
+
 // ---------- Sortie
 for (const e of erreurs) console.error(`ERREUR  ${e}`);
 console.log(
