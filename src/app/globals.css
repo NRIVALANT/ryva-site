@@ -38,6 +38,32 @@ html {
   }
 }
 
+/* Mobile : un élément qui reçoit le focus ne doit pas rester caché sous la barre CTA fixe (WCAG 2.4.11). */
+@media (width < 48rem) {
+  html {
+    scroll-padding-bottom: calc(5rem + env(safe-area-inset-bottom));
+  }
+}
+
+/*
+ * Menu : en haut de page, le navigateur marque par défaut le premier lien comme actif. On force sa
+ * couleur normale tant que le hero est à l'écran (une animation l'emporte sur :target-current).
+ */
+@keyframes repere-inactif {
+  from,
+  to {
+    color: var(--color-texte);
+  }
+}
+
+@supports (animation-timeline: scroll()) {
+  header nav li:first-child > a:not(:hover) {
+    animation: repere-inactif linear;
+    animation-timeline: scroll(root);
+    animation-range: 0 100svh;
+  }
+}
+
 body {
   background-color: var(--color-fond);
   color: var(--color-texte);
