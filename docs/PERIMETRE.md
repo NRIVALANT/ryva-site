@@ -1,7 +1,7 @@
 # Périmètre — Site vitrine RYVA
 
 Une case = une chose vérifiable. On ne coche que ce qui est réellement livré et testé.
-`S0` à `S5` renvoient aux sessions de `docs/PROMPTS.md`. Les lignes marquées **[À DÉCIDER]** ne sont **pas** construites tant que Nicolas n'a pas tranché.
+`S0` à `S5` renvoient aux sessions décrites dans `docs/AVANCEMENT.md`. Les lignes marquées **[À DÉCIDER]** ne sont **pas** construites tant que Nicolas n'a pas tranché.
 
 ---
 
